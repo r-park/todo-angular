@@ -1,0 +1,9 @@
+<form name="newTaskForm" ng-submit="taskForm.submit()" novalidate>
+  <input
+    escape="taskForm.cancel()"
+    name="taskTitle"
+    ng-model="taskForm.title"
+    placeholder="What needs to be done?"
+    required
+    type="text">
+</form>
