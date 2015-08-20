@@ -23,7 +23,7 @@ module.exports = function(config) {
       'node_modules/sinon/pkg/sinon.js',
       'src/app/**/*.js',
       'src/app/**/*.html',
-      'test/**'
+      'test/unit/**'
     ],
 
 
@@ -36,15 +36,15 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      './src/app/**/*.js': ['commonjs'],
-      './test/spec/**/*.js': ['commonjs'],
-      './src/app/**/*.html': ['ng-html2js']
+      'src/app/**/*.js': ['commonjs'],
+      'test/unit/**/*.js': ['commonjs'],
+      'src/app/**/*.html': ['ng-html2js']
     },
 
 
     // additional options for karma-commonjs
     commonjsPreprocessor: {
-      modulesRoot: __dirname + '/src'
+      modulesRoot: 'src'
     },
 
 
