@@ -24,6 +24,7 @@ var autoprefixer  = require('autoprefixer-core'),
 ---------------------------------------------------------*/
 var paths = {
   coverage: 'tmp/coverage/**/lcov.info',
+
   lib: {
     src: [
       'node_modules/angular/angular.min.js',
@@ -34,6 +35,7 @@ var paths = {
     ],
     target: 'target/lib'
   },
+
   src: {
     assets: 'src/assets/**/*',
     html: 'src/*.html',
@@ -41,7 +43,12 @@ var paths = {
     scss: 'src/styles/**/*.scss',
     tpl: 'src/app/components/**/*.html'
   },
-  target: 'target'
+
+  target: 'target',
+
+  test: {
+    unit: 'test/unit/**/*.js'
+  }
 };
 
 
@@ -75,7 +82,7 @@ var config = {
   },
 
   eslint: {
-    useEslintrc: true
+    src: [paths.src.js, paths.test.unit]
   },
 
   header: {
@@ -196,8 +203,8 @@ gulp.task('js.watch', function(done){
 
 gulp.task('lint', function(){
   return gulp
-    .src(paths.src.js)
-    .pipe(eslint(config.eslint))
+    .src(config.eslint.src)
+    .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
@@ -263,4 +270,4 @@ gulp.task('default', gulp.series('build', function watch(){
 }));
 
 
-gulp.task('dist', gulp.series('lint', 'test', 'build', 'headers'));
+gulp.task('dist', gulp.series('test', 'build', 'headers'));

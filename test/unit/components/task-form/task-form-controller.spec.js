@@ -30,30 +30,30 @@ describe('TaskFormController', function(){
   });
 
 
-  describe("Initialization", function(){
-    it("should set property `title` with an empty string", function(){
+  describe('Initialization', function(){
+    it('should set property `title` with an empty string', function(){
       expect(controller.title).toBe('');
     });
 
-    it("should define a `cancel` function", function(){
+    it('should define a `cancel` function', function(){
       expect(typeof controller.cancel).toBe('function');
     });
 
-    it("should define a `submit` function", function(){
+    it('should define a `submit` function', function(){
       expect(typeof controller.submit).toBe('function');
     });
   });
 
 
-  describe("Creating a task", function(){
+  describe('Creating a task', function(){
     describe('when form is valid', function(){
-      it("should delegate to TaskService#createTask", function(){
+      it('should delegate to TaskService#createTask', function(){
         controller.submit();
         scope.$digest();
         expect(taskService.createTask.callCount).toBe(1);
       });
 
-      it("should pass value of `title` to TaskService#createTask", function(){
+      it('should pass value of `title` to TaskService#createTask', function(){
         var title = 'foo';
         controller.title = title;
         controller.submit();
@@ -61,7 +61,7 @@ describe('TaskFormController', function(){
         expect(taskService.createTask.calledWith(title)).toBe(true);
       });
 
-      it("should set `title` with an empty string when create is successful", function(){
+      it('should set `title` with an empty string when create is successful', function(){
         controller.title = 'foo';
         controller.submit();
         scope.$digest();
@@ -70,7 +70,7 @@ describe('TaskFormController', function(){
     });
 
     describe('when form is invalid', function(){
-      it("should do nothing", function(){
+      it('should do nothing', function(){
         scope.newTaskForm.$valid = false;
         controller.submit();
         scope.$digest();
@@ -80,8 +80,8 @@ describe('TaskFormController', function(){
   });
 
 
-  describe("Cancelling", function(){
-    it("should set `title` with an empty string", function(){
+  describe('Cancelling', function(){
+    it('should set `title` with an empty string', function(){
       controller.title = 'foo';
       controller.cancel();
       expect(controller.title).toBe('');
