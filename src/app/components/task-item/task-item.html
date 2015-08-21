@@ -9,14 +9,16 @@
 
   <span ng-hide="taskItem.editing">{{ task.title }}</span>
 
-  <input
-    escape="taskItem.cancelEdit()"
-    name="taskTitle"
-    ng-blur="taskItem.update()"
-    ng-model="taskItem.title"
-    ng-show="taskItem.editing"
-    required
-    type="text">
+  <form ng-show="taskItem.editing" ng-submit="taskItem.save()">
+    <input
+      autocomplete="off"
+      escape="taskItem.cancelEdit()"
+      name="taskTitle"
+      ng-blur="taskItem.save()"
+      ng-model="taskItem.title"
+      required
+      type="text">
+  </form>
 
   <button ng-click="taskItem.edit()" type="button">Edit</button>
   <button ng-click="taskItem.delete(task)" type="button">Delete</button>

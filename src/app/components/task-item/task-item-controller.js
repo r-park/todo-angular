@@ -27,7 +27,7 @@ function TaskItemController($scope, taskService) {
     taskService.deleteTask($scope.task);
   };
 
-  vm.update = function() {
+  vm.save = function() {
     if (vm.editing) {
       if ($scope.task.title !== vm.title) {
         $scope.task.title = vm.title;

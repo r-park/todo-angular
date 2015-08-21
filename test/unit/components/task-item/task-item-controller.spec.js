@@ -49,7 +49,7 @@ describe('TaskItemController', function(){
     });
 
     it('should define an `update` function', function(){
-      expect(typeof controller.update).toBe('function');
+      expect(typeof controller.save).toBe('function');
     });
 
     it('should define a `toggleCompleted` function', function(){
@@ -98,14 +98,14 @@ describe('TaskItemController', function(){
   describe('Updating a task', function(){
     it('should set `editing` to `false`', function(){
       controller.editing = true;
-      controller.update();
+      controller.save();
       scope.$digest();
       expect(controller.editing).toBe(false);
     });
 
     describe('when `editing` is `false`', function(){
       it('should do nothing', function(){
-        controller.update();
+        controller.save();
         scope.$digest();
         expect(taskService.updateTask.callCount).toBe(0);
       });
@@ -115,7 +115,7 @@ describe('TaskItemController', function(){
       it('should delegate to TaskService#updateTask', function(){
         controller.editing = true;
         controller.title = 'foo';
-        controller.update();
+        controller.save();
         scope.$digest();
         expect(taskService.updateTask.callCount).toBe(1);
       });
@@ -123,7 +123,7 @@ describe('TaskItemController', function(){
       it('should pass task object to TaskService#updateTask', function(){
         controller.editing = true;
         controller.title = 'foo';
-        controller.update();
+        controller.save();
         scope.$digest();
         expect(taskService.updateTask.calledWith(scope.task)).toBe(true);
       });
@@ -133,7 +133,7 @@ describe('TaskItemController', function(){
       it('should do nothing', function(){
         controller.editing = true;
         controller.title = scope.task.title;
-        controller.update();
+        controller.save();
         scope.$digest();
         expect(taskService.updateTask.callCount).toBe(0);
       });
