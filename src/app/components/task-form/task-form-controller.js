@@ -26,7 +26,7 @@ function TaskFormController($scope, taskService) {
     if ($scope.newTaskForm.$valid) {
       taskService
         .createTask(vm.title)
-        .then(function () {
+        .then(function(){
           setTitle();
         });
     }

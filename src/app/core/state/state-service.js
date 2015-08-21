@@ -14,6 +14,7 @@ StateService.$inject = [
  * @name StateService
  * @param $state
  * @param $stateParams
+ * @param taskStatus
  * @returns {{
  *   params: Object,
  *   isActiveTasks: Function,
