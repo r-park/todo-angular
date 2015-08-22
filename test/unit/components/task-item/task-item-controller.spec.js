@@ -48,7 +48,7 @@ describe('TaskItemController', function(){
       expect(typeof controller.delete).toBe('function');
     });
 
-    it('should define an `update` function', function(){
+    it('should define a `save` function', function(){
       expect(typeof controller.save).toBe('function');
     });
 
