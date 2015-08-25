@@ -42,6 +42,7 @@
     "karma-coverage": "^0.5.0",
     "karma-jasmine": "^0.3.6",
     "karma-ng-html2js-preprocessor": "^0.1.2",
+    "object-assign": "^4.0.1",
     "sinon": "^1.15.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

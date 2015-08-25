@@ -1,4 +1,5 @@
-var autoprefixer  = require('autoprefixer-core'),
+var assign        = require('object-assign'),
+    autoprefixer  = require('autoprefixer-core'),
     browserify    = require('browserify'),
     browserSync   = require('browser-sync'),
     buffer        = require('vinyl-buffer'),
@@ -20,21 +21,22 @@ var autoprefixer  = require('autoprefixer-core'),
 
 
 /*=========================================================
+  ENV
+---------------------------------------------------------*/
+var DIST = gutil.env._[0] === 'dist';
+
+
+/*=========================================================
   PATHS
 ---------------------------------------------------------*/
 var paths = {
-  coverage: 'tmp/coverage/**/lcov.info',
-
-  lib: {
-    src: [
-      'node_modules/angular/angular.min.js',
-      'node_modules/angular-aria/angular-aria.min.js',
-      'node_modules/angular-ui-router/release/angular-ui-router.min.js',
-      'node_modules/angular-storage/dist/angular-storage.min.js',
-      'node_modules/fastclick/lib/fastclick.js'
-    ],
-    target: 'target/lib'
-  },
+  lib: [
+    'node_modules/angular/angular.min.js',
+    'node_modules/angular-aria/angular-aria.min.js',
+    'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+    'node_modules/angular-storage/dist/angular-storage.min.js',
+    'node_modules/fastclick/lib/fastclick.js'
+  ],
 
   src: {
     assets: 'src/assets/**/*',
@@ -46,9 +48,7 @@ var paths = {
 
   target: 'target',
 
-  test: {
-    unit: 'test/unit/**/*.js'
-  }
+  test: 'test/unit/**/*.js'
 };
 
 
@@ -63,7 +63,7 @@ var config = {
   browserify: {
     options: {
       cache: {},
-      debug: true,
+      debug: !DIST,
       entries: './src/app/app.js',
       noparse: [],
       packageCache: {}
@@ -81,8 +81,18 @@ var config = {
     startPath: paths.target
   },
 
+  copy: {
+    lib: {
+      dest: paths.target + '/lib'
+    }
+  },
+
+  coveralls: {
+    src: 'tmp/coverage/**/lcov.info'
+  },
+
   eslint: {
-    src: [paths.src.js, paths.test.unit]
+    src: [paths.src.js, paths.test]
   },
 
   header: {
@@ -113,7 +123,7 @@ var config = {
 
   sass: {
     errLogToConsole: true,
-    outputStyle: 'nested',
+    outputStyle: DIST ? 'compressed' : 'nested',
     precision: 10,
     sourceComments: false
   }
@@ -144,14 +154,14 @@ gulp.task('copy.html', function(){
 
 gulp.task('copy.lib', function(){
   return gulp
-    .src(paths.lib.src)
-    .pipe(gulp.dest(paths.lib.target));
+    .src(paths.lib)
+    .pipe(gulp.dest(config.copy.lib.dest));
 });
 
 
 gulp.task('coveralls', function(){
   return gulp
-    .src(paths.coverage)
+    .src(config.coveralls.src)
     .pipe(coveralls())
 });
 
@@ -168,7 +178,6 @@ gulp.task('headers', function(){
 
 gulp.task('js', function(done){
   var bundler = browserify(config.browserify.options);
-
   bundler
     .bundle()
     .pipe(sourceStream(config.browserify.outfile))
@@ -237,14 +246,20 @@ gulp.task('templates', function(){
 });
 
 
-gulp.task('test', gulp.series('lint', function executeTestSuites(done){
-  var server = new KarmaServer(config.karma, function(exitCode){
-    if (exitCode === 1) {
-      process.exit(exitCode);
-    }
-    else {
-      done();
-    }
+gulp.task('test', gulp.series('lint', function test(done){
+  var conf = assign({}, config.karma, {singleRun: true});
+  var server = new KarmaServer(conf, function(error){
+    if (error) process.exit(error);
+    else done();
+  });
+  server.start();
+}));
+
+
+gulp.task('test.watch', gulp.series('lint', function testTDD(done){
+  var server = new KarmaServer(config.karma, function(error){
+    if (error) process.exit(error);
+    else done();
   });
 
   server.start();
@@ -258,7 +273,7 @@ gulp.task('build', gulp.series(
   'copy.lib',
   'scss',
   'templates',
-  'js.watch'
+  DIST ? 'js' : 'js.watch'
 ));
 
 
