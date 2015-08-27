@@ -14,9 +14,17 @@ var app = angular
   /*===================================
     Constants
   -----------------------------------*/
+  .constant('apiType', require('./constants/api-type'))
   .constant('keyCodes', require('./constants/key-codes'))
   .constant('localStorageKey', require('./constants/local-storage-key'))
   .constant('taskStatus', require('./constants/task-status'))
+
+
+  /*===================================
+    API
+  -----------------------------------*/
+  .factory('LocalApi', require('./core/api/local-api'))
+  .factory('ServerApi', require('./core/api/server-api'))
 
 
   /*===================================

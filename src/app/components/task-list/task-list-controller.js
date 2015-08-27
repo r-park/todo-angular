@@ -15,6 +15,8 @@ function TaskListController($scope, stateService, taskService) {
 
   $scope.state = stateService;
 
+  vm.tasks = [];
+
   taskService.getTasks().then(function(){
     vm.tasks = taskService.tasks;
   });

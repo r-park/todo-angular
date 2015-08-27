@@ -246,7 +246,7 @@ gulp.task('templates', function(){
 });
 
 
-gulp.task('test', gulp.series('lint', function test(done){
+gulp.task('test', gulp.series('lint', function karmaSingleRun(done){
   var conf = assign({}, config.karma, {singleRun: true});
   var server = new KarmaServer(conf, function(error){
     if (error) process.exit(error);
@@ -256,7 +256,7 @@ gulp.task('test', gulp.series('lint', function test(done){
 }));
 
 
-gulp.task('test.watch', gulp.series('lint', function testTDD(done){
+gulp.task('test.watch', gulp.series('lint', function karma(done){
   var server = new KarmaServer(config.karma, function(error){
     if (error) process.exit(error);
     else done();
