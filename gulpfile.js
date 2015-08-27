@@ -210,6 +210,26 @@ gulp.task('js.watch', function(done){
 });
 
 
+gulp.task('karma', function(done){
+  var conf = assign({}, config.karma, {singleRun: true});
+  var server = new KarmaServer(conf, function(error){
+    if (error) process.exit(error);
+    else done();
+  });
+  server.start();
+});
+
+
+gulp.task('karma.watch', function(done){
+  var server = new KarmaServer(config.karma, function(error){
+    if (error) process.exit(error);
+    else done();
+  });
+
+  server.start();
+});
+
+
 gulp.task('lint', function(){
   return gulp
     .src(config.eslint.src)
@@ -246,24 +266,10 @@ gulp.task('templates', function(){
 });
 
 
-gulp.task('test', gulp.series('lint', function karmaSingleRun(done){
-  var conf = assign({}, config.karma, {singleRun: true});
-  var server = new KarmaServer(conf, function(error){
-    if (error) process.exit(error);
-    else done();
-  });
-  server.start();
-}));
+gulp.task('test', gulp.series('lint', 'karma'));
 
 
-gulp.task('test.watch', gulp.series('lint', function karma(done){
-  var server = new KarmaServer(config.karma, function(error){
-    if (error) process.exit(error);
-    else done();
-  });
-
-  server.start();
-}));
+gulp.task('test.watch', gulp.series('lint', 'karma.watch'));
 
 
 gulp.task('build', gulp.series(
