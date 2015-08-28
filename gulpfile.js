@@ -162,7 +162,7 @@ gulp.task('copy.lib', function(){
 gulp.task('coveralls', function(){
   return gulp
     .src(config.coveralls.src)
-    .pipe(coveralls())
+    .pipe(coveralls());
 });
 
 
@@ -170,7 +170,8 @@ gulp.task('headers', function(){
   var pkg = require('./package.json');
   var headerContent = {date: (new Date()).toISOString(), name: pkg.name, version: pkg.version, url: pkg.homepage};
 
-  return gulp.src(config.header.src)
+  return gulp
+    .src(config.header.src)
     .pipe(header(config.header.template, headerContent))
     .pipe(gulp.dest(paths.target));
 });

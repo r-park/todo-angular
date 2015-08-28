@@ -48,7 +48,8 @@ function ServerApi($http, Task) {
      */
     createTask: function(title) {
       var task = new Task(title);
-      return $http.post('http://localhost:8000/tasks', task)
+      return $http
+        .post('http://localhost:8000/tasks', task)
         .then(function(response){
           service.tasks.push(response.data);
           return response.data;
@@ -62,7 +63,8 @@ function ServerApi($http, Task) {
      */
     deleteTask: function(task) {
       service.tasks.splice(service.tasks.indexOf(task), 1);
-      return $http.delete('http://localhost:8000' + task.links.self)
+      return $http
+        .delete('http://localhost:8000' + task.links.self)
         .then(function(){
           return task;
         });
@@ -74,7 +76,8 @@ function ServerApi($http, Task) {
      * @returns {Task}
      */
     updateTask: function(task) {
-      return $http.put('http://localhost:8000' + task.links.self, task)
+      return $http
+        .put('http://localhost:8000' + task.links.self, task)
         .then(function(){
           return task;
         });
