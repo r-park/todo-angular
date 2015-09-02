@@ -1,13 +1,15 @@
 'use strict';
 
 
-module.exports = ['keyCodes', function(keyCodes){
+module.exports = function(){
+  var ESCAPE_KEY = 27;
+
   return {
     restrict: 'A',
 
     link: function(scope, $element, attrs) {
       $element.on('keyup', function(event){
-        if (event.keyCode === keyCodes.ESCAPE) {
+        if (event.keyCode === ESCAPE_KEY) {
           scope.$apply(attrs.escape);
         }
       });
@@ -17,4 +19,4 @@ module.exports = ['keyCodes', function(keyCodes){
       });
     }
   };
-}];
+};
