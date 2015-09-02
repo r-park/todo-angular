@@ -133,8 +133,8 @@ var config = {
 /*=========================================================
   TASKS
 ---------------------------------------------------------*/
-gulp.task('clean.target', function(done){
-  del(paths.target, done);
+gulp.task('clean.target', function(){
+  return del(paths.target);
 });
 
 
