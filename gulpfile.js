@@ -1,4 +1,5 @@
-var assign        = require('object-assign'),
+var apiServer     = require('todo-server'),
+    assign        = require('object-assign'),
     autoprefixer  = require('autoprefixer-core'),
     browserify    = require('browserify'),
     browserSync   = require('browser-sync'),
@@ -255,6 +256,12 @@ gulp.task('server', function(done){
   browserSync
     .create()
     .init(config.browserSync, done);
+});
+
+
+gulp.task('server.api', function(done){
+  apiServer.start();
+  done();
 });
 
 
