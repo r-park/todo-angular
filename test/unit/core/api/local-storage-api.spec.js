@@ -1,8 +1,8 @@
 'use strict';
 
-describe('LocalApi', function(){
+describe('LocalStorageApi', function(){
 
-  var LocalApi = require('app/core/api/local-api'),
+  var LocalStorageApi = require('app/core/api/local-storage-api'),
       Task = require('app/core/task/task');
 
   var storageKey = 'test';
@@ -12,7 +12,7 @@ describe('LocalApi', function(){
     angular.mock.module('angular-storage', function($provide){
       $provide.constant('localStorageKey', storageKey);
       $provide.value('Task', Task);
-      $provide.factory('api', LocalApi);
+      $provide.factory('api', LocalStorageApi);
     });
   });
 

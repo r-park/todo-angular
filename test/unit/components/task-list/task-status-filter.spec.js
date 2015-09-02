@@ -2,7 +2,7 @@
 
 describe('taskStatus filter', function(){
 
-  var taskStatus = require('app/constants/task-status'),
+  var taskStatus = require('app/config/task-status'),
       taskStatusFilter = require('app/components/task-list/task-status-filter');
 
 

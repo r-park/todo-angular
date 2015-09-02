@@ -3,7 +3,7 @@
 describe('stateConfig', function(){
 
   var stateConfig = require('app/core/state/state-config'),
-      taskStatus = require('app/constants/task-status');
+      taskStatus = require('app/config/task-status');
 
 
   beforeEach(function(){

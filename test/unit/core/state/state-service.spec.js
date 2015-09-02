@@ -4,7 +4,7 @@ describe('StateService', function(){
 
   var stateConfig = require('app/core/state/state-config'),
       StateService = require('app/core/state/state-service'),
-      taskStatus = require('app/constants/task-status');
+      taskStatus = require('app/config/task-status');
 
 
   beforeEach(function(){

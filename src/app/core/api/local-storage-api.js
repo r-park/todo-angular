@@ -1,9 +1,9 @@
 'use strict';
 
 
-module.exports = LocalApi;
+module.exports = LocalStorageApi;
 
-LocalApi.$inject = [
+LocalStorageApi.$inject = [
   '$q',
   '$localStorage',
   'localStorageKey',
@@ -12,7 +12,7 @@ LocalApi.$inject = [
 
 
 /**
- * @name LocalApi
+ * @name LocalStorageApi
  * @param $q
  * @param $localStorage
  * @param {string} localStorageKey
@@ -25,7 +25,7 @@ LocalApi.$inject = [
  *   updateTask: Function
  * }}
  */
-function LocalApi($q, $localStorage, localStorageKey, Task) {
+function LocalStorageApi($q, $localStorage, localStorageKey, Task) {
   var service = {
 
     /**

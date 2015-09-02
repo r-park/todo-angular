@@ -24,12 +24,6 @@ TaskService.$inject = [
  * }}
  */
 function TaskService($injector, $log, apiType) {
-  if (apiType.SERVER) {
-    $log.info('API:Server');
-    return $injector.get('ServerApi');
-  }
-  else {
-    $log.info('API:Local');
-    return $injector.get('LocalApi');
-  }
+  $log.info('API:', apiType);
+  return $injector.get(apiType);
 }
