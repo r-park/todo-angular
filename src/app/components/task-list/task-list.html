@@ -1,7 +1,7 @@
 <div>
-  <a ng-class="{active: state.isTasks()}" ui-sref="tasks.all">View All</a>
-  <a ng-class="{active: state.isActiveTasks()}" ui-sref="tasks.filtered({status: 'active'})">Active</a>
-  <a ng-class="{active: state.isCompletedTasks()}" ui-sref="tasks.filtered({status: 'completed'})">Completed</a>
+  <a ng-class="{active: state.isTasks()}" ui-sref="app.tasks">View All</a>
+  <a ng-class="{active: state.isActiveTasks()}" ui-sref="app.tasks.filtered({status: 'active'})">Active</a>
+  <a ng-class="{active: state.isCompletedTasks()}" ui-sref="app.tasks.filtered({status: 'completed'})">Completed</a>
 </div>
 
 

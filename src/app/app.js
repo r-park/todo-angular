@@ -41,6 +41,12 @@ var app = angular
 
 
   /*===================================
+    App component
+  -----------------------------------*/
+  .controller('AppController', require('./components/app/app'))
+
+
+  /*===================================
     TaskForm component
   -----------------------------------*/
   .controller('TaskFormController', require('./components/task-form/task-form-controller'))
