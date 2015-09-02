@@ -16,7 +16,6 @@ var app = angular
   -----------------------------------*/
   .constant('apiType', require('./config/api'))
   .constant('localStorageKey', require('./config/local-storage').key)
-  .constant('taskStatus', require('./config/task-status'))
 
 
   /*===================================

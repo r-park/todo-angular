@@ -64,11 +64,11 @@ var config = {
     options: {
       cache: {},
       debug: !DIST,
-      entries: './src/app/app.js',
+      entries: './src/app/main.js',
       noparse: [],
       packageCache: {}
     },
-    outfile: 'app.js'
+    outfile: 'main.js'
   },
 
   browserSync: {
