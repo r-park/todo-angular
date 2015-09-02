@@ -1,14 +1,23 @@
 'use strict';
 
 describe('Task', function(){
-
   var Task = require('app/core/task/task');
+
 
   beforeEach(function(){
     angular.mock.module(function($provide){
       $provide.value('Task', Task);
     });
   });
+
+
+  it('should have static property `STATUS_ACTIVE`', inject(function(Task){
+    expect(Task.STATUS_ACTIVE).toBe('active');
+  }));
+
+  it('should have static property `STATUS_COMPLETED`', inject(function(Task){
+    expect(Task.STATUS_COMPLETED).toBe('completed');
+  }));
 
 
   describe('Constructor', function(){

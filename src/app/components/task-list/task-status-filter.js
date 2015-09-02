@@ -1,12 +1,12 @@
 'use strict';
 
 
-module.exports = ['taskStatus', function(taskStatus) {
+module.exports = ['Task', function(Task) {
 
   return function(taskList, status) {
-    if (!status || !taskStatus.VALID[status]) return taskList;
+    if (!status) return taskList;
 
-    var completed = status === taskStatus.COMPLETED;
+    var completed = status === Task.STATUS_COMPLETED;
 
     return taskList.filter(function(task){
       return task.completed === completed;

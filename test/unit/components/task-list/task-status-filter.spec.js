@@ -2,13 +2,13 @@
 
 describe('taskStatus filter', function(){
 
-  var taskStatus = require('app/config/task-status'),
+  var Task = require('app/core/task/task'),
       taskStatusFilter = require('app/components/task-list/task-status-filter');
 
 
   beforeEach(function(){
     angular.module('test', [])
-      .constant('taskStatus', taskStatus)
+      .value('Task', Task)
       .filter('taskStatus', taskStatusFilter);
 
     angular.mock.module('test');
@@ -18,7 +18,7 @@ describe('taskStatus filter', function(){
   it('should filter active tasks when param `status` is `active`', inject(function($filter){
     var taskList = [{completed: true}, {completed: false}];
     var filter = $filter('taskStatus');
-    var result = filter(taskList, taskStatus.ACTIVE);
+    var result = filter(taskList, Task.STATUS_ACTIVE);
 
     expect(result.length).toBe(1);
     expect(result[0].completed).toBe(false);
@@ -27,7 +27,7 @@ describe('taskStatus filter', function(){
   it('should filter completed tasks when param `status` is `completed`', inject(function($filter){
     var taskList = [{completed: true}, {completed: false}];
     var filter = $filter('taskStatus');
-    var result = filter(taskList, taskStatus.COMPLETED);
+    var result = filter(taskList, Task.STATUS_COMPLETED);
 
     expect(result.length).toBe(1);
     expect(result[0].completed).toBe(true);
@@ -37,14 +37,6 @@ describe('taskStatus filter', function(){
     var taskList = [{completed: true}, {completed: false}];
     var filter = $filter('taskStatus');
     var result = filter(taskList);
-
-    expect(result).toBe(taskList);
-  }));
-
-  it('should return all tasks when param `status` is invalid', inject(function($filter){
-    var taskList = [{completed: true}, {completed: false}];
-    var filter = $filter('taskStatus');
-    var result = filter(taskList, 'foo');
 
     expect(result).toBe(taskList);
   }));

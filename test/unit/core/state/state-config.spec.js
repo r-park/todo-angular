@@ -3,7 +3,7 @@
 describe('stateConfig', function(){
 
   var stateConfig = require('app/core/state/state-config'),
-      taskStatus = require('app/config/task-status');
+      Task = require('app/core/task/task');
 
 
   beforeEach(function(){
@@ -30,13 +30,13 @@ describe('stateConfig', function(){
   describe('`app.tasks.filtered` state', function(){
     describe('with status: `active`', function(){
       it('should transition to `app.tasks.filtered` state', inject(function($rootScope, $state){
-        $state.go('app.tasks.filtered', {status: taskStatus.ACTIVE});
+        $state.go('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
         $rootScope.$digest();
         expect($state.current.name).toBe('app.tasks.filtered');
       }));
 
       it('should set param `status` to `active`', inject(function($rootScope, $state, $stateParams){
-        $state.go('app.tasks.filtered', {status: taskStatus.ACTIVE});
+        $state.go('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
         $rootScope.$digest();
         expect($stateParams.status).toBe('active');
       }));
@@ -44,13 +44,13 @@ describe('stateConfig', function(){
 
     describe('with status: `completed`', function(){
       it('should transition to `app.tasks.filtered` state', inject(function($rootScope, $state){
-        $state.go('app.tasks.filtered', {status: taskStatus.COMPLETED});
+        $state.go('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
         $rootScope.$digest();
         expect($state.current.name).toBe('app.tasks.filtered');
       }));
 
       it('should set param `status` to `completed`', inject(function($rootScope, $state, $stateParams){
-        $state.go('app.tasks.filtered', {status: taskStatus.COMPLETED});
+        $state.go('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
         $rootScope.$digest();
         expect($stateParams.status).toBe('completed');
       }));

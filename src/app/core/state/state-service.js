@@ -6,7 +6,7 @@ module.exports = StateService;
 StateService.$inject = [
   '$state',
   '$stateParams',
-  'taskStatus'
+  'Task'
 ];
 
 
@@ -14,7 +14,7 @@ StateService.$inject = [
  * @name StateService
  * @param $state
  * @param $stateParams
- * @param taskStatus
+ * @param Task
  * @returns {{
  *   params: Object,
  *   isActiveTasks: Function,
@@ -25,7 +25,7 @@ StateService.$inject = [
  *   toTasks: Function
  * }}
  */
-function StateService($state, $stateParams, taskStatus) {
+function StateService($state, $stateParams, Task) {
   return {
 
     /**
@@ -37,14 +37,14 @@ function StateService($state, $stateParams, taskStatus) {
      * @returns {boolean}
      */
     isActiveTasks: function() {
-      return $state.is('app.tasks.filtered', {status: taskStatus.ACTIVE});
+      return $state.is('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
     },
 
     /**
      * @returns {boolean}
      */
     isCompletedTasks: function() {
-      return $state.is('app.tasks.filtered', {status: taskStatus.COMPLETED});
+      return $state.is('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
     },
 
     /**
@@ -59,7 +59,7 @@ function StateService($state, $stateParams, taskStatus) {
      * @returns {promise}
      */
     toActiveTasks: function() {
-      return $state.go('app.tasks.filtered', {status: taskStatus.ACTIVE});
+      return $state.go('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
     },
 
     /**
@@ -67,7 +67,7 @@ function StateService($state, $stateParams, taskStatus) {
      * @returns {promise}
      */
     toCompletedTasks: function() {
-      return $state.go('app.tasks.filtered', {status: taskStatus.COMPLETED});
+      return $state.go('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
     },
 
     /**
