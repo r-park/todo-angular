@@ -1,6 +1,5 @@
-var apiServer     = require('todo-server'),
-    assign        = require('object-assign'),
-    autoprefixer  = require('autoprefixer-core'),
+var assign        = require('object-assign'),
+    autoprefixer  = require('autoprefixer'),
     browserify    = require('browserify'),
     browserSync   = require('browser-sync'),
     buffer        = require('vinyl-buffer'),
@@ -17,6 +16,7 @@ var apiServer     = require('todo-server'),
     sourceMaps    = require('gulp-sourcemaps'),
     sourceStream  = require('vinyl-source-stream'),
     templateCache = require('gulp-angular-templatecache'),
+    todoServer    = require('todo-server'),
     uglify        = require('gulp-uglify'),
     watchify      = require('watchify');
 
@@ -43,7 +43,7 @@ var paths = {
     assets: 'src/assets/**/*',
     html: 'src/*.html',
     js: 'src/**/*.js',
-    scss: 'src/styles/**/*.scss',
+    sass: 'src/styles/**/*.scss',
     tpl: 'src/app/components/**/*.html'
   },
 
@@ -114,19 +114,19 @@ var config = {
     spare: false
   },
 
-  templateCache: {
-    options: {
-      module: 'app.templates',
-      standalone: true
-    },
-    outfile: 'app-templates.js'
-  },
-
   sass: {
     errLogToConsole: true,
     outputStyle: DIST ? 'compressed' : 'nested',
     precision: 10,
     sourceComments: false
+  },
+
+  templateCache: {
+    options: {
+      module: 'templates',
+      standalone: true
+    },
+    outfile: 'templates.js'
   }
 };
 
@@ -241,9 +241,9 @@ gulp.task('lint', function(){
 });
 
 
-gulp.task('scss', function(){
+gulp.task('sass', function(){
   return gulp
-    .src(paths.src.scss)
+    .src(paths.src.sass)
     .pipe(sass(config.sass))
     .pipe(postcss([
       autoprefixer(config.autoprefixer)
@@ -260,7 +260,7 @@ gulp.task('server', function(done){
 
 
 gulp.task('server.api', function(done){
-  apiServer.start();
+  todoServer.start();
   done();
 });
 
@@ -285,7 +285,7 @@ gulp.task('build', gulp.series(
   'copy.assets',
   'copy.html',
   'copy.lib',
-  'scss',
+  'sass',
   'templates',
   DIST ? 'js' : 'js.watch'
 ));
@@ -294,7 +294,7 @@ gulp.task('build', gulp.series(
 gulp.task('default', gulp.series('build', function watch(){
   gulp.watch(paths.src.assets, gulp.task('copy.assets'));
   gulp.watch(paths.src.html, gulp.task('copy.html'));
-  gulp.watch(paths.src.scss, gulp.task('scss'));
+  gulp.watch(paths.src.sass, gulp.task('sass'));
   gulp.watch(paths.src.tpl, gulp.task('templates'));
 }));
 

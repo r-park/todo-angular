@@ -50,7 +50,7 @@ module.exports = function(config) {
 
     // additional options for karma-ng-html2js-preprocessor
     ngHtml2JsPreprocessor: {
-      moduleName: 'app.templates',
+      moduleName: 'templates',
       stripPrefix: 'src/app/components/'
     },
 

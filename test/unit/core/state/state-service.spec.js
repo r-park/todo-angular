@@ -8,7 +8,7 @@ describe('StateService', function(){
 
 
   beforeEach(function(){
-    angular.module('test', ['ui.router', 'app.templates'])
+    angular.module('test', ['ui.router', 'templates'])
       .value('Task', Task)
       .factory('stateService', StateService)
       .controller('AppController', angular.noop)
