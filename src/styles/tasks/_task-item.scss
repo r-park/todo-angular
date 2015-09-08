@@ -1,0 +1,144 @@
+//===================================================================
+//  TASK-ITEM
+//===================================================================
+
+.task-item {
+  display: flex;
+  border-bottom: 1px dotted #666;
+  height: 60px;
+  overflow: hidden;
+  color: #fff;
+  font-size: rem(24px);
+  font-weight: 300;
+}
+
+.task-item--completed {}
+
+
+//=====================================
+//  CELLS
+//-------------------------------------
+.cell {
+  &:first-child,
+  &:last-child {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
+
+  &:first-child {
+    padding-right: 20px;
+  }
+
+  &:nth-child(2) {
+    flex: 1;
+    padding-right: 30px;
+    overflow: hidden;
+  }
+}
+
+
+//=====================================
+//  CHECKBOX
+//-------------------------------------
+.task-item__checkbox {
+  outline: none;
+  border-radius: 100px;
+  padding: 7px 8px 8px;
+  width: 40px;
+  height: 40px;
+  fill: rgba(255,255,255,.15);
+  cursor: pointer;
+  background: #2a2a2a;
+}
+
+.task-item__checkbox--checked {
+  fill: #85bf6b;
+}
+
+
+//=====================================
+//  TITLE : STATIC
+//-------------------------------------
+@keyframes fade-title {
+  from { color: #fff; }
+  to { color: #666; }
+}
+
+@keyframes strike-title {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.task-item__title {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  line-height: 60px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top: 2px solid #85bf6b;
+    width: 0;
+    height: 45%;
+    content: '';
+  }
+
+  .task-item--completed & {
+    color: #666;
+    animation: fade-title 120ms ease-in-out;
+  }
+
+  .task-item--completed &:after {
+    width: 100%;
+    animation: strike-title 180ms ease-in-out;
+  }
+}
+
+
+//=====================================
+//  TITLE : INPUT
+//-------------------------------------
+.task-item__input {
+  border: 0;
+  padding: 0;
+  width: 100%;
+  height: 60px;
+  color: inherit;
+  font: inherit;
+  background: transparent;
+}
+
+
+
+//=====================================
+//  BUTTONS
+//-------------------------------------
+.task-item__button {
+  @include button-base;
+  margin-left: 5px;
+  border: 0;
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  text-indent: -200px;
+
+  &:first-child {
+    margin: 0;
+  }
+}
+
+.task-item__button--delete {
+  background: #2a2a2a url('./images/icon-trash-24px.svg') 50% no-repeat;
+}
+
+.task-item__button--edit {
+  background: #2a2a2a url('./images/icon-pencil-24px.svg') 50% no-repeat;
+}

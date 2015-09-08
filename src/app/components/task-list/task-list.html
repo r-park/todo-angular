@@ -1,8 +1,8 @@
-<div>
+<div class="task-filters">
   <a ng-class="{active: state.isTasks()}" ui-sref="app.tasks">View All</a>
   <a ng-class="{active: state.isActiveTasks()}" ui-sref="app.tasks.filtered({status: 'active'})">Active</a>
   <a ng-class="{active: state.isCompletedTasks()}" ui-sref="app.tasks.filtered({status: 'completed'})">Completed</a>
 </div>
 
 
-<div ng-include="'task-item/task-item.html'"></div>
+<div class="task-list" ng-include="'task-item/task-item.html'"></div>

@@ -1,6 +1,8 @@
-<form name="newTaskForm" ng-submit="taskForm.submit()" novalidate>
+<form class="task-form" name="newTaskForm" ng-submit="taskForm.submit()" novalidate>
   <input
     autocomplete="off"
+    autofocus
+    class="task-form__input"
     escape="taskForm.cancel()"
     name="taskTitle"
     ng-model="taskForm.title"

@@ -38,6 +38,7 @@ function TaskItemController($scope, taskService) {
   };
 
   vm.toggleCompleted = function() {
+    $scope.task.completed = !$scope.task.completed;
     taskService.updateTask($scope.task);
   };
 }

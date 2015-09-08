@@ -1,0 +1,18 @@
+//===================================================================
+//  TASK-FILTERS
+//===================================================================
+
+.task-filters {
+  margin-bottom: 55px;
+  font-size: rem(16px);
+  line-height: 24px;
+
+  a {
+    color: #999;
+    text-decoration: none;
+  }
+
+  a.active {
+    color: #fff;
+  }
+}

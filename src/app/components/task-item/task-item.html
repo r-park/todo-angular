@@ -1,26 +1,51 @@
 <div
+  class="task-item"
+  ng-class="{'task-item--completed': task.completed, 'task-item--editing': taskItem.editing}"
   ng-controller="TaskItemController as taskItem"
   ng-repeat="task in taskList.tasks | taskStatus:state.params.status track by $index">
 
-  <input
-    ng-change="taskItem.toggleCompleted()"
-    ng-model="task.completed"
-    type="checkbox">
+  <div class="cell">
+    <div
+      aria-label="Task completed?"
+      class="task-item__checkbox"
+      ng-class="{'task-item__checkbox--checked': task.completed}"
+      ng-click="taskItem.toggleCompleted()"
+      ng-model="task.completed"
+      role="checkbox">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+      </svg>
+    </div>
+  </div>
 
-  <span ng-hide="taskItem.editing">{{ task.title }}</span>
+  <div class="cell">
+    <div
+      class="task-item__title"
+      ng-hide="taskItem.editing">
+      <span>{{ task.title }}</span>
+    </div>
 
-  <form ng-show="taskItem.editing" ng-submit="taskItem.save()">
-    <input
-      autocomplete="off"
-      escape="taskItem.cancelEdit()"
-      name="taskTitle"
-      ng-blur="taskItem.save()"
-      ng-model="taskItem.title"
-      required
-      type="text">
-  </form>
+    <form ng-show="taskItem.editing" ng-submit="taskItem.save()">
+      <input
+        autocomplete="off"
+        class="task-item__input"
+        escape="taskItem.cancelEdit()"
+        name="taskTitle"
+        ng-blur="taskItem.save()"
+        ng-model="taskItem.title"
+        required
+        type="text">
+    </form>
+  </div>
 
-  <button ng-click="taskItem.edit()" type="button">Edit</button>
-  <button ng-click="taskItem.delete(task)" type="button">Delete</button>
-
+  <div class="cell">
+    <button
+      class="task-item__button task-item__button--edit"
+      ng-click="taskItem.edit()"
+      type="button">Edit</button>
+    <button
+      class="task-item__button task-item__button--delete"
+      ng-click="taskItem.delete()"
+      type="button">Delete</button>
+  </div>
 </div>
