@@ -6,7 +6,7 @@ module.exports = TaskService;
 TaskService.$inject = [
   '$injector',
   '$log',
-  'apiType'
+  'storageStrategy'
 ];
 
 
@@ -14,7 +14,7 @@ TaskService.$inject = [
  * @name TaskService
  * @param $injector
  * @param $log
- * @param {{SERVER:boolean}} apiType
+ * @param {string} storageStrategy
  * @returns {{
  *   tasks: Array,
  *   getTasks: Function,
@@ -23,7 +23,7 @@ TaskService.$inject = [
  *   updateTask: Function
  * }}
  */
-function TaskService($injector, $log, apiType) {
-  $log.info('API:', apiType);
-  return $injector.get(apiType);
+function TaskService($injector, $log, storageStrategy) {
+  $log.info('STORAGE_STRATEGY:', storageStrategy);
+  return $injector.get(storageStrategy);
 }

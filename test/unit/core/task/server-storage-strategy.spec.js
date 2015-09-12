@@ -1,22 +1,22 @@
 'use strict';
 
-describe('ServerApi', function(){
+describe('ServerStorageStrategy', function(){
 
-  var ServerApi = require('app/core/api/server-api'),
+  var ServerStorageStrategy = require('app/core/task/server-storage-strategy'),
       Task = require('app/core/task/task');
 
-  var api, httpBackend;
+  var httpBackend, storage;
 
 
   beforeEach(function(){
     angular.mock.module(function($provide){
       $provide.value('Task', Task);
-      $provide.factory('ServerApi', ServerApi);
+      $provide.factory('ServerStorageStrategy', ServerStorageStrategy);
     });
 
-    inject(function($httpBackend, ServerApi){
+    inject(function($httpBackend, ServerStorageStrategy){
       httpBackend = $httpBackend;
-      api = ServerApi;
+      storage = ServerStorageStrategy;
     });
   });
 
@@ -31,17 +31,17 @@ describe('ServerApi', function(){
       var task = {title: 'test'};
 
       httpBackend.whenPOST('http://localhost:8000/tasks').respond(200, task);
-      api.tasks = [];
-      api.createTask(task.title);
+      storage.tasks = [];
+      storage.createTask(task.title);
       httpBackend.flush();
 
-      expect(api.tasks[0]).toEqual(task);
+      expect(storage.tasks[0]).toEqual(task);
     });
 
     it('should POST new task to server', function(){
       var task = {completed: false, title: 'test'};
       httpBackend.expectPOST('http://localhost:8000/tasks', task).respond(200);
-      api.createTask(task.title);
+      storage.createTask(task.title);
       httpBackend.flush();
     });
 
@@ -50,7 +50,7 @@ describe('ServerApi', function(){
 
       httpBackend.whenPOST('http://localhost:8000/tasks').respond(200, task);
 
-      api.createTask(task.title)
+      storage.createTask(task.title)
         .then(function(_task){
           expect(_task).toEqual(task);
         });
@@ -66,11 +66,11 @@ describe('ServerApi', function(){
       task.links = {self: '/tasks/123'};
 
       httpBackend.whenDELETE('http://localhost:8000/tasks/123').respond(204);
-      api.tasks = [task];
-      api.deleteTask(task);
+      storage.tasks = [task];
+      storage.deleteTask(task);
       httpBackend.flush();
 
-      expect(api.tasks.length).toBe(0);
+      expect(storage.tasks.length).toBe(0);
     });
 
     it('should DELETE task from server', function(){
@@ -78,7 +78,7 @@ describe('ServerApi', function(){
       task.links = {self: '/tasks/123'};
 
       httpBackend.expectDELETE('http://localhost:8000/tasks/123').respond(204);
-      api.deleteTask(task);
+      storage.deleteTask(task);
       httpBackend.flush();
     });
 
@@ -88,7 +88,7 @@ describe('ServerApi', function(){
 
       httpBackend.whenDELETE('http://localhost:8000/tasks/123').respond(204);
 
-      api.deleteTask(task)
+      storage.deleteTask(task)
         .then(function(_task){
           expect(_task).toBe(task);
         });
@@ -106,7 +106,7 @@ describe('ServerApi', function(){
       task.links = {self: '/tasks/123'};
 
       httpBackend.expectPUT('http://localhost:8000/tasks/123', task).respond(200);
-      api.updateTask(task);
+      storage.updateTask(task);
       httpBackend.flush();
     });
 
@@ -116,7 +116,7 @@ describe('ServerApi', function(){
 
       httpBackend.whenPUT('http://localhost:8000/tasks/123').respond(200);
 
-      api.updateTask(task)
+      storage.updateTask(task)
         .then(function(_task){
           expect(_task).toBe(task);
         });
@@ -129,35 +129,35 @@ describe('ServerApi', function(){
   describe('Getting tasks', function(){
     it('should GET tasks from server', function(){
       httpBackend.expectGET('http://localhost:8000/tasks').respond(200, []);
-      api.getTasks();
+      storage.getTasks();
       httpBackend.flush();
     });
 
     it('should set `tasks` with an array of tasks from server', function(){
       httpBackend.whenGET('http://localhost:8000/tasks').respond(200, [{}, {}]);
-      api.tasks = [];
-      api.getTasks();
+      storage.tasks = [];
+      storage.getTasks();
       httpBackend.flush();
 
-      expect(api.tasks.length).toBe(2);
+      expect(storage.tasks.length).toBe(2);
     });
 
     it('should set `tasks` with an empty array if there are no tasks', function(){
       httpBackend.whenGET('http://localhost:8000/tasks').respond(200, []);
-      api.tasks = [];
-      api.getTasks();
+      storage.tasks = [];
+      storage.getTasks();
       httpBackend.flush();
 
-      expect(api.tasks.length).toBe(0);
+      expect(storage.tasks.length).toBe(0);
     });
 
     it('should fulfill promise with the tasks array', function(){
       httpBackend.whenGET('http://localhost:8000/tasks').respond(200, [{}, {}]);
-      api.tasks = [];
+      storage.tasks = [];
 
-      api.getTasks()
+      storage.getTasks()
         .then(function(tasks){
-          expect(tasks).toBe(api.tasks);
+          expect(tasks).toBe(storage.tasks);
         });
 
       httpBackend.flush();

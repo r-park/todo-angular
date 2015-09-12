@@ -14,15 +14,8 @@ var app = angular
   /*===================================
     Constants
   -----------------------------------*/
-  .constant('apiType', require('./config/api'))
+  .constant('storageStrategy', require('./config/storage-strategy'))
   .constant('localStorageKey', require('./config/local-storage').key)
-
-
-  /*===================================
-    API
-  -----------------------------------*/
-  .factory('LocalStorageApi', require('./core/api/local-storage-api'))
-  .factory('ServerApi', require('./core/api/server-api'))
 
 
   /*===================================
@@ -36,6 +29,8 @@ var app = angular
     Task
   -----------------------------------*/
   .value('Task', require('./core/task/task'))
+  .factory('LocalStorageStrategy', require('./core/task/local-storage-strategy'))
+  .factory('ServerStorageStrategy', require('./core/task/server-storage-strategy'))
   .factory('TaskService', require('./core/task/task-service'))
 
 

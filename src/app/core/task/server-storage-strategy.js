@@ -1,16 +1,16 @@
 'use strict';
 
 
-module.exports = ServerApi;
+module.exports = ServerStorageStrategy;
 
-ServerApi.$inject = [
+ServerStorageStrategy.$inject = [
   '$http',
   'Task'
 ];
 
 
 /**
- * @name ServerApi
+ * @name ServerStorageStrategy
  * @param $http
  * @param Task
  * @returns {{
@@ -21,7 +21,7 @@ ServerApi.$inject = [
  *   updateTask: Function
  * }}
  */
-function ServerApi($http, Task) {
+function ServerStorageStrategy($http, Task) {
   var service = {
 
     /**

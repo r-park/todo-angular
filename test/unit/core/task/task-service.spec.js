@@ -2,38 +2,38 @@
 
 describe('TaskService', function(){
   var TaskService = require('app/core/task/task-service');
-  var LocalStorageApi = {};
-  var ServerApi = {};
+  var LocalStorageStrategy = {};
+  var ServerStorageStrategy = {};
 
 
-  describe('local api', function(){
+  describe('LocalStorageStrategy', function(){
     beforeEach(function(){
       angular.mock.module(function($provide){
-        $provide.constant('apiType', 'LocalStorageApi');
-        $provide.value('LocalStorageApi', LocalStorageApi);
-        $provide.value('ServerApi', ServerApi);
+        $provide.constant('storageStrategy', 'LocalStorageStrategy');
+        $provide.value('LocalStorageStrategy', LocalStorageStrategy);
+        $provide.value('ServerStorageStrategy', ServerStorageStrategy);
         $provide.factory('taskService', TaskService);
       });
     });
 
-    it('should implement local api', inject(function(taskService){
-      expect(taskService).toBe(LocalStorageApi);
+    it('should implement local storage strategy', inject(function(taskService){
+      expect(taskService).toBe(LocalStorageStrategy);
     }));
   });
 
 
-  describe('server api', function(){
+  describe('ServerStorageStrategy', function(){
     beforeEach(function(){
       angular.mock.module(function($provide){
-        $provide.constant('apiType', 'ServerApi');
-        $provide.value('LocalStorageApi', LocalStorageApi);
-        $provide.value('ServerApi', ServerApi);
+        $provide.constant('storageStrategy', 'ServerStorageStrategy');
+        $provide.value('LocalStorageStrategy', LocalStorageStrategy);
+        $provide.value('ServerStorageStrategy', ServerStorageStrategy);
         $provide.factory('taskService', TaskService);
       });
     });
 
-    it('should implement server api', inject(function(taskService){
-      expect(taskService).toBe(ServerApi);
+    it('should implement server storage strategy', inject(function(taskService){
+      expect(taskService).toBe(ServerStorageStrategy);
     }));
   });
 
