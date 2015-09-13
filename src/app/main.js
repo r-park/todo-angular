@@ -14,8 +14,8 @@ var app = angular
   /*===================================
     Constants
   -----------------------------------*/
-  .constant('storageStrategy', require('./config/storage-strategy'))
-  .constant('localStorageKey', require('./config/local-storage').key)
+  .constant('localStorageKey', require('./config/storage').LOCAL_STORAGE_KEY)
+  .constant('storageStrategy', require('./config/storage').STORAGE_STRATEGY)
 
 
   /*===================================
