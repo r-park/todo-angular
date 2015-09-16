@@ -37,7 +37,7 @@ var app = angular
   /*===================================
     App component
   -----------------------------------*/
-  .controller('AppController', require('./components/app/app'))
+  .controller('AppController', require('./components/app/app-controller'))
 
 
   /*===================================

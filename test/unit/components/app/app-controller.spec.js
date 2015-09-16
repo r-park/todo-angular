@@ -2,7 +2,7 @@
 
 describe('AppController', function(){
 
-  var AppController = require('app/components/app/app');
+  var AppController = require('app/components/app/app-controller');
 
   var controller,
       stateService;
