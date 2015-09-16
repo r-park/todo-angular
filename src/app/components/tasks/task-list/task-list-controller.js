@@ -4,16 +4,12 @@
 module.exports = TaskListController;
 
 TaskListController.$inject = [
-  '$scope',
-  'StateService',
   'TaskService'
 ];
 
 
-function TaskListController($scope, stateService, taskService) {
+function TaskListController(taskService) {
   var vm = this;
-
-  $scope.state = stateService;
 
   vm.tasks = [];
 

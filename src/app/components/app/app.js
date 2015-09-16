@@ -3,9 +3,13 @@
 
 module.exports = AppController;
 
-AppController.$inject = [];
+AppController.$inject = [
+  'StateService'
+];
 
 
-function AppController() {
-  //var vm = this;
+function AppController(stateService) {
+  var vm = this;
+
+  vm.state = stateService;
 }
