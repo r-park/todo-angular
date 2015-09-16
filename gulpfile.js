@@ -73,7 +73,7 @@ var config = {
   },
 
   browserSync: {
-    browser: ['google chrome canary'],
+    browser: ['google chrome'],
     files: [paths.target + '/**/*'],
     notify: false,
     port: 7000,
@@ -286,12 +286,14 @@ gulp.task('build', gulp.series(
   'copy.html',
   'copy.lib',
   'sass',
-  'templates',
-  DIST ? 'js' : 'js.watch'
+  'templates'
 ));
 
 
-gulp.task('default', gulp.series('build', function watch(){
+gulp.task('default', gulp.series('test', 'build', 'js', 'server'));
+
+
+gulp.task('dev', gulp.series('build', 'js.watch', 'server', function watch(){
   gulp.watch(paths.src.assets, gulp.task('copy.assets'));
   gulp.watch(paths.src.html, gulp.task('copy.html'));
   gulp.watch(paths.src.sass, gulp.task('sass'));
@@ -299,4 +301,4 @@ gulp.task('default', gulp.series('build', function watch(){
 }));
 
 
-gulp.task('dist', gulp.series('test', 'build', 'headers'));
+gulp.task('dist', gulp.series('test', 'build', 'js', 'headers'));
