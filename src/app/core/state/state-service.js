@@ -37,21 +37,21 @@ function StateService($state, $stateParams, Task) {
      * @returns {boolean}
      */
     isActiveTasks: function() {
-      return $state.is('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
+      return $state.is('app.tasks', {filter: Task.STATUS_ACTIVE});
     },
 
     /**
      * @returns {boolean}
      */
     isCompletedTasks: function() {
-      return $state.is('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
+      return $state.is('app.tasks', {filter: Task.STATUS_COMPLETED});
     },
 
     /**
      * @returns {boolean}
      */
     isTasks: function() {
-      return $state.is('app.tasks');
+      return $state.is('app.tasks', {filter: ''});
     },
 
     /**
@@ -59,7 +59,7 @@ function StateService($state, $stateParams, Task) {
      * @returns {promise}
      */
     toActiveTasks: function() {
-      return $state.go('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
+      return $state.go('app.tasks', {filter: Task.STATUS_ACTIVE});
     },
 
     /**
@@ -67,7 +67,7 @@ function StateService($state, $stateParams, Task) {
      * @returns {promise}
      */
     toCompletedTasks: function() {
-      return $state.go('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
+      return $state.go('app.tasks', {filter: Task.STATUS_COMPLETED});
     },
 
     /**

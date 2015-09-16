@@ -22,13 +22,13 @@ describe('StateService', function(){
 
   describe('#isActiveTasks()', function(){
     it('should return true if current state matches', inject(function($rootScope, $state, stateService){
-      $state.go('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
+      $state.go('app.tasks', {filter: Task.STATUS_ACTIVE});
       $rootScope.$digest();
       expect(stateService.isActiveTasks()).toBe(true);
     }));
 
-    it('should return false if current does not match', inject(function($rootScope, $state, stateService){
-      $state.go('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
+    it('should return false if current state does not match', inject(function($rootScope, $state, stateService){
+      $state.go('app.tasks', {filter: Task.STATUS_COMPLETED});
       $rootScope.$digest();
       expect(stateService.isActiveTasks()).toBe(false);
     }));
@@ -37,13 +37,13 @@ describe('StateService', function(){
 
   describe('#isCompletedTasks()', function(){
     it('should return true if current state matches', inject(function($rootScope, $state, stateService){
-      $state.go('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
+      $state.go('app.tasks', {filter: Task.STATUS_COMPLETED});
       $rootScope.$digest();
       expect(stateService.isCompletedTasks()).toBe(true);
     }));
 
-    it('should return false if current does not match', inject(function($rootScope, $state, stateService){
-      $state.go('app.tasks.filtered', {status: Task.STATUS_ACTIVE});
+    it('should return false if current state does not match', inject(function($rootScope, $state, stateService){
+      $state.go('app.tasks', {filter: Task.STATUS_ACTIVE});
       $rootScope.$digest();
       expect(stateService.isCompletedTasks()).toBe(false);
     }));
@@ -57,8 +57,8 @@ describe('StateService', function(){
       expect(stateService.isTasks()).toBe(true);
     }));
 
-    it('should return false if current does not match', inject(function($rootScope, $state, stateService){
-      $state.go('app.tasks.filtered', {status: Task.STATUS_COMPLETED});
+    it('should return false if current state does not match', inject(function($rootScope, $state, stateService){
+      $state.go('app.tasks', {filter: Task.STATUS_COMPLETED});
       $rootScope.$digest();
       expect(stateService.isTasks()).toBe(false);
     }));
@@ -70,15 +70,15 @@ describe('StateService', function(){
       stateService.toActiveTasks();
       $rootScope.$digest();
 
-      expect($state.current.name).toBe('app.tasks.filtered');
-      expect($stateParams.status).toBe(Task.STATUS_ACTIVE);
+      expect($state.current.name).toBe('app.tasks');
+      expect($stateParams.filter).toBe(Task.STATUS_ACTIVE);
     }));
 
-    it('should set `params.status` to `active`', inject(function($rootScope, $state, $stateParams, stateService){
+    it('should set `params.filter` to `active`', inject(function($rootScope, $state, $stateParams, stateService){
       stateService.toActiveTasks();
       $rootScope.$digest();
 
-      expect(stateService.params.status).toBe(Task.STATUS_ACTIVE);
+      expect(stateService.params.filter).toBe(Task.STATUS_ACTIVE);
     }));
   });
 
@@ -88,15 +88,15 @@ describe('StateService', function(){
       stateService.toCompletedTasks();
       $rootScope.$digest();
 
-      expect($state.current.name).toBe('app.tasks.filtered');
-      expect($stateParams.status).toBe(Task.STATUS_COMPLETED);
+      expect($state.current.name).toBe('app.tasks');
+      expect($stateParams.filter).toBe(Task.STATUS_COMPLETED);
     }));
 
-    it('should set `params.status` to `completed`', inject(function($rootScope, $state, $stateParams, stateService){
+    it('should set `params.filter` to `completed`', inject(function($rootScope, $state, $stateParams, stateService){
       stateService.toCompletedTasks();
       $rootScope.$digest();
 
-      expect(stateService.params.status).toBe(Task.STATUS_COMPLETED);
+      expect(stateService.params.filter).toBe(Task.STATUS_COMPLETED);
     }));
   });
 
@@ -107,14 +107,14 @@ describe('StateService', function(){
       $rootScope.$digest();
 
       expect($state.current.name).toBe('app.tasks');
-      expect($stateParams.status).not.toBeDefined();
+      expect($stateParams.filter).not.toBeDefined();
     }));
 
-    it('should not set `params.status`', inject(function($rootScope, $state, $stateParams, stateService){
+    it('should not set `params.filter`', inject(function($rootScope, $state, $stateParams, stateService){
       stateService.toTasks();
       $rootScope.$digest();
 
-      expect(stateService.params.status).not.toBeDefined();
+      expect(stateService.params.filter).not.toBeDefined();
     }));
   });
 

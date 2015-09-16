@@ -28,7 +28,7 @@ function stateConfig($stateProvider, $urlRouterProvider) {
 
     .state({
       name: 'app.tasks',
-      url: '/tasks',
+      url: '/tasks?filter',
       views: {
         'main@app': {
           templateUrl: 'tasks/tasks.html'
@@ -40,17 +40,6 @@ function stateConfig($stateProvider, $urlRouterProvider) {
         },
 
         'list@app.tasks': {
-          controller: 'TaskListController as taskList',
-          templateUrl: 'tasks/task-list/task-list.html'
-        }
-      }
-    })
-
-    .state({
-      name: 'app.tasks.filtered',
-      url: '/{status:active|completed}',
-      views: {
-        'list@tasks': {
           controller: 'TaskListController as taskList',
           templateUrl: 'tasks/task-list/task-list.html'
         }

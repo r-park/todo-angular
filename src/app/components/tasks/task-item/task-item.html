@@ -2,7 +2,7 @@
   class="task-item"
   ng-class="{'task-item--completed': task.completed, 'task-item--editing': taskItem.editing, 'task-item--status-updated': taskItem.statusUpdated}"
   ng-controller="TaskItemController as taskItem"
-  ng-repeat="task in taskList.tasks | taskStatus:app.state.params.status track by $index">
+  ng-repeat="task in taskList.tasks | taskStatus:app.state.params.filter track by $index">
 
   <div class="cell">
     <div
