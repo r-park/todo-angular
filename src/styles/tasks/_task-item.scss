@@ -92,12 +92,18 @@
 
   .task-item--completed & {
     color: #666;
-    animation: fade-title 120ms ease-in-out;
   }
 
   .task-item--completed &:after {
     width: 100%;
-    animation: strike-title 180ms ease-in-out;
+  }
+
+  .task-item--completed.task-item--status-updated & {
+    animation: fade-title 120ms ease-in-out;
+  }
+
+  .task-item--completed.task-item--status-updated &:after {
+    animation: strike-title 200ms ease-in-out;
   }
 }
 

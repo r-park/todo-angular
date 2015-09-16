@@ -1,6 +1,6 @@
 <div
   class="task-item"
-  ng-class="{'task-item--completed': task.completed, 'task-item--editing': taskItem.editing}"
+  ng-class="{'task-item--completed': task.completed, 'task-item--editing': taskItem.editing, 'task-item--status-updated': taskItem.statusUpdated}"
   ng-controller="TaskItemController as taskItem"
   ng-repeat="task in taskList.tasks | taskStatus:app.state.params.status track by $index">
 
@@ -22,7 +22,7 @@
     <div
       class="task-item__title"
       ng-hide="taskItem.editing">
-      <span>{{ task.title }}</span>
+      {{ task.title }}
     </div>
 
     <form ng-show="taskItem.editing" ng-submit="taskItem.save()">

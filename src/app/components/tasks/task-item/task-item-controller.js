@@ -14,6 +14,8 @@ function TaskItemController($scope, taskService) {
 
   vm.editing = false;
 
+  vm.statusUpdated = false;
+
   vm.cancelEdit = function() {
     vm.editing = false;
   };
@@ -40,5 +42,6 @@ function TaskItemController($scope, taskService) {
   vm.toggleCompleted = function() {
     $scope.task.completed = !$scope.task.completed;
     taskService.updateTask($scope.task);
+    vm.statusUpdated = $scope.task.completed;
   };
 }
