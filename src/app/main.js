@@ -43,20 +43,20 @@ var app = angular
   /*===================================
     TaskForm component
   -----------------------------------*/
-  .controller('TaskFormController', require('./components/task-form/task-form-controller'))
+  .controller('TaskFormController', require('./components/tasks/task-form/task-form-controller'))
 
 
   /*===================================
     TaskItem component
   -----------------------------------*/
-  .controller('TaskItemController', require('./components/task-item/task-item-controller'))
+  .controller('TaskItemController', require('./components/tasks/task-item/task-item-controller'))
 
 
   /*===================================
     TaskList component
   -----------------------------------*/
-  .controller('TaskListController', require('./components/task-list/task-list-controller'))
-  .filter('taskStatus', require('./components/task-list/task-status-filter'))
+  .controller('TaskListController', require('./components/tasks/task-list/task-list-controller'))
+  .filter('taskStatus', require('./components/tasks/task-list/task-status-filter'))
 
 
   /*===================================

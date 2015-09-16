@@ -2,7 +2,7 @@
 
 describe('TaskItemController', function(){
 
-  var TaskItemController = require('app/components/task-item/task-item-controller');
+  var TaskItemController = require('app/components/tasks/task-item/task-item-controller');
 
   var controller,
       scope,

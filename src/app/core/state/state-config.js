@@ -36,12 +36,12 @@ function stateConfig($stateProvider, $urlRouterProvider) {
 
         'form@app.tasks': {
           controller: 'TaskFormController as taskForm',
-          templateUrl: 'task-form/task-form.html'
+          templateUrl: 'tasks/task-form/task-form.html'
         },
 
         'list@app.tasks': {
           controller: 'TaskListController as taskList',
-          templateUrl: 'task-list/task-list.html'
+          templateUrl: 'tasks/task-list/task-list.html'
         }
       }
     })
@@ -52,7 +52,7 @@ function stateConfig($stateProvider, $urlRouterProvider) {
       views: {
         'list@tasks': {
           controller: 'TaskListController as taskList',
-          templateUrl: 'task-list/task-list.html'
+          templateUrl: 'tasks/task-list/task-list.html'
         }
       }
     });

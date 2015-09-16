@@ -3,7 +3,7 @@
 describe('taskStatus filter', function(){
 
   var Task = require('app/core/task/task'),
-      taskStatusFilter = require('app/components/task-list/task-status-filter');
+      taskStatusFilter = require('app/components/tasks/task-list/task-status-filter');
 
 
   beforeEach(function(){
