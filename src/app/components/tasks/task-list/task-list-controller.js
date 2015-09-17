@@ -13,7 +13,7 @@ function TaskListController(taskService) {
 
   vm.tasks = [];
 
-  taskService.getTasks().then(function(){
-    vm.tasks = taskService.tasks;
+  taskService.getTasks().then(function(tasks){
+    vm.tasks = tasks;
   });
 }

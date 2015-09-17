@@ -47,13 +47,19 @@
   padding: 7px 8px 8px;
   width: 40px;
   height: 40px;
-  fill: rgba(255,255,255,.15);
+  fill: #555;
   cursor: pointer;
   background: #2a2a2a;
+
+  &:hover {
+    fill: #999;
+  }
 }
 
 .task-item__checkbox--checked {
-  fill: #85bf6b;
+  &, &:hover {
+    fill: #85bf6b;
+  }
 }
 
 
@@ -86,7 +92,7 @@
     bottom: 0;
     border-top: 2px solid #85bf6b;
     width: 0;
-    height: 45%;
+    height: 46%;
     content: '';
   }
 
@@ -103,7 +109,7 @@
   }
 
   .task-item--completed.task-item--status-updated &:after {
-    animation: strike-title 200ms ease-in-out;
+    animation: strike-title 180ms ease-in-out;
   }
 }
 
@@ -131,20 +137,20 @@
   margin-left: 5px;
   border: 0;
   border-radius: 100px;
+  padding-top: 6px;
   width: 40px;
   height: 40px;
   overflow: hidden;
-  text-indent: -200px;
+  background: #2a2a2a;
+
+  // svg icon
+  fill: #555;
 
   &:first-child {
     margin: 0;
   }
-}
 
-.task-item__button--delete {
-  background: #2a2a2a url('./images/icon-trash-24px.svg') 50% no-repeat;
-}
-
-.task-item__button--edit {
-  background: #2a2a2a url('./images/icon-pencil-24px.svg') 50% no-repeat;
+  &:hover {
+    fill: #999;
+  }
 }
