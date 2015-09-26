@@ -12,9 +12,11 @@ TaskService.$inject = [
 
 /**
  * @name TaskService
+ *
  * @param $injector
  * @param $log
  * @param {string} storageStrategy
+ *
  * @returns {{
  *   tasks: Array,
  *   getTasks: Function,

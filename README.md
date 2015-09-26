@@ -2,6 +2,10 @@
 [![Coverage Status](https://coveralls.io/repos/r-park/todo-angular/badge.svg?branch=master)](https://coveralls.io/r/r-park/todo-angular?branch=master)
 
 # Todo app with Angular 1.5
+- Angular 1.5
+- Angular ui-router
+- Browserify
+- SASS
 
 ## Installing dependencies
 The gulp tasks for this project require gulp v4-alpha ([docs](https://github.com/gulpjs/gulp/tree/4.0/docs)). If you already have gulp v3.x installed globally, it must be removed to make way for v4.

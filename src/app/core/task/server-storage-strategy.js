@@ -11,8 +11,10 @@ ServerStorageStrategy.$inject = [
 
 /**
  * @name ServerStorageStrategy
+ *
  * @param $http
  * @param Task
+ *
  * @returns {{
  *   tasks: Array,
  *   getTasks: Function,

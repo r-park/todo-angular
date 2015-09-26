@@ -13,10 +13,12 @@ LocalStorageStrategy.$inject = [
 
 /**
  * @name LocalStorageStrategy
+ *
  * @param $q
  * @param $localStorage
  * @param {string} localStorageKey
  * @param Task
+ *
  * @returns {{
  *   tasks: Array,
  *   getTasks: Function,
