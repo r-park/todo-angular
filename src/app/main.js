@@ -62,7 +62,8 @@ var app = angular
   /*===================================
     Directives
   -----------------------------------*/
-  .directive('escape', require('./common/escape-directive'));
+  .directive('escape', require('./common/escape-directive'))
+  .directive('focus', require('./common/focus-directive'));
 
 
 // Bootstrap
