@@ -22,7 +22,7 @@ var app = angular
     State (ui-router)
   -----------------------------------*/
   .factory('StateService', require('./core/state/state-service'))
-  .config(require('./core/state/state-config'))
+  .config(require('./router'))
 
 
   /*===================================
@@ -62,8 +62,8 @@ var app = angular
   /*===================================
     Directives
   -----------------------------------*/
-  .directive('escape', require('./common/escape-directive'))
-  .directive('focus', require('./common/focus-directive'));
+  .directive('escape', require('./directives/escape-directive'))
+  .directive('focus', require('./directives/focus-directive'));
 
 
 // Bootstrap

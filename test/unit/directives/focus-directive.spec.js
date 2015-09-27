@@ -2,7 +2,7 @@
 
 describe('focus directive', function(){
 
-  var focusDirective = require('app/common/focus-directive');
+  var focusDirective = require('app/directives/focus-directive');
 
   var element,
       scope,

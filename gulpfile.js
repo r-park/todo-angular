@@ -35,8 +35,7 @@ var paths = {
     'node_modules/angular/angular.min.js',
     'node_modules/angular-aria/angular-aria.min.js',
     'node_modules/angular-ui-router/release/angular-ui-router.min.js',
-    'node_modules/angular-storage/dist/angular-storage.min.js',
-    'node_modules/fastclick/lib/fastclick.js'
+    'node_modules/angular-storage/dist/angular-storage.min.js'
   ],
 
   src: {
@@ -178,37 +177,34 @@ gulp.task('headers', function(){
 });
 
 
-gulp.task('js', function(done){
+gulp.task('js', function(){
   var bundler = browserify(config.browserify.options);
-  bundler
+  bundler.on('log', gutil.log);
+  return bundler
     .bundle()
     .pipe(sourceStream(config.browserify.outfile))
     .pipe(buffer())
     .pipe(sourceMaps.init({loadMaps: true}))
     .pipe(uglify())
     .pipe(sourceMaps.write('./'))
-    .pipe(gulp.dest(paths.target))
-    .on('end', done);
+    .pipe(gulp.dest(paths.target));
 });
 
 
-gulp.task('js.watch', function(done){
+gulp.task('js.watch', function(){
   var bundler = watchify(browserify(config.browserify.options));
   bundler.on('update', bundle);
+  bundler.on('log', gutil.log);
 
   function bundle() {
-    gutil.log(gutil.colors.cyan('bundling JS'), '...');
-    bundler
+    return bundler
       .bundle()
+      .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(sourceStream(config.browserify.outfile))
-      .pipe(gulp.dest(paths.target))
-      .on('end', function(){
-        gutil.log("Finished", gutil.colors.cyan('bundling JS'));
-        done();
-      });
+      .pipe(gulp.dest(paths.target));
   }
 
-  bundle();
+  return bundle();
 });
 
 

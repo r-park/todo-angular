@@ -2,7 +2,7 @@
 
 describe('StateService', function(){
 
-  var stateConfig = require('app/core/state/state-config'),
+  var routerConfig = require('app/router'),
       StateService = require('app/core/state/state-service'),
       Task = require('app/core/task/task');
 
@@ -14,7 +14,7 @@ describe('StateService', function(){
       .controller('AppController', angular.noop)
       .controller('TaskFormController', angular.noop)
       .controller('TaskListController', angular.noop)
-      .config(stateConfig);
+      .config(routerConfig);
 
     angular.mock.module('test');
   });

@@ -1,8 +1,8 @@
 'use strict';
 
-describe('stateConfig', function(){
+describe('router', function(){
 
-  var stateConfig = require('app/core/state/state-config'),
+  var routerConfig = require('app/router'),
       Task = require('app/core/task/task');
 
 
@@ -11,7 +11,7 @@ describe('stateConfig', function(){
       .controller('AppController', angular.noop)
       .controller('TaskFormController', angular.noop)
       .controller('TaskListController', angular.noop)
-      .config(stateConfig);
+      .config(routerConfig);
 
     angular.mock.module('test');
   });

@@ -2,7 +2,7 @@
 
 describe('escape directive', function(){
 
-  var escapeDirective = require('app/common/escape-directive');
+  var escapeDirective = require('app/directives/escape-directive');
 
   var element,
       scope;
