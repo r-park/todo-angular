@@ -1,7 +1,6 @@
 'use strict';
 
-describe('router', function(){
-
+describe('Router', function(){
   var routerConfig = require('app/router'),
       Task = require('app/core/task/task');
 

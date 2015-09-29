@@ -13,7 +13,6 @@ function TaskItemController($scope, taskService) {
   var vm = this;
 
   vm.editing = false;
-
   vm.statusUpdated = false;
 
   vm.cancelEdit = function() {

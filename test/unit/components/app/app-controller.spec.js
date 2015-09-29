@@ -1,7 +1,6 @@
 'use strict';
 
 describe('AppController', function(){
-
   var AppController = require('app/components/app/app-controller');
 
   var controller,

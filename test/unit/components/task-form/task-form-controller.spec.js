@@ -1,7 +1,6 @@
 'use strict';
 
 describe('TaskFormController', function(){
-
   var TaskFormController = require('app/components/tasks/task-form/task-form-controller');
 
   var controller,

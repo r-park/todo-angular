@@ -1,7 +1,6 @@
 'use strict';
 
 describe('TaskItemController', function(){
-
   var TaskItemController = require('app/components/tasks/task-item/task-item-controller');
 
   var controller,

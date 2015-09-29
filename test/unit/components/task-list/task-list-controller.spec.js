@@ -1,7 +1,6 @@
 'use strict';
 
 describe('TaskListController', function(){
-
   var TaskListController = require('app/components/tasks/task-list/task-list-controller');
 
   var controller,

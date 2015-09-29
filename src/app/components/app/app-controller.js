@@ -9,7 +9,5 @@ AppController.$inject = [
 
 
 function AppController(stateService) {
-  var vm = this;
-
-  vm.state = stateService;
+  this.state = stateService;
 }
