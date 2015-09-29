@@ -14,8 +14,7 @@ var app = angular
   /*===================================
     Constants
   -----------------------------------*/
-  .constant('localStorageKey', require('./config/storage').LOCAL_STORAGE_KEY)
-  .constant('storageStrategy', require('./config/storage').STORAGE_STRATEGY)
+  .constant('storageConfig', require('./config/storage'))
 
 
   /*===================================
@@ -50,13 +49,13 @@ var app = angular
     TaskItem component
   -----------------------------------*/
   .controller('TaskItemController', require('./components/tasks/task-item/task-item-controller'))
+  .filter('taskStatus', require('./components/tasks/task-item/task-status-filter'))
 
 
   /*===================================
     TaskList component
   -----------------------------------*/
   .controller('TaskListController', require('./components/tasks/task-list/task-list-controller'))
-  .filter('taskStatus', require('./components/tasks/task-list/task-status-filter'))
 
 
   /*===================================

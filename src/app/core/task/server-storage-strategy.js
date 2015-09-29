@@ -5,6 +5,7 @@ module.exports = ServerStorageStrategy;
 
 ServerStorageStrategy.$inject = [
   '$http',
+  'storageConfig',
   'Task'
 ];
 
@@ -13,6 +14,7 @@ ServerStorageStrategy.$inject = [
  * @name ServerStorageStrategy
  *
  * @param $http
+ * @param storageConfig
  * @param Task
  *
  * @returns {{
@@ -23,7 +25,7 @@ ServerStorageStrategy.$inject = [
  *   updateTask: Function
  * }}
  */
-function ServerStorageStrategy($http, Task) {
+function ServerStorageStrategy($http, storageConfig, Task) {
   var service = {
 
     /**
@@ -37,7 +39,7 @@ function ServerStorageStrategy($http, Task) {
      */
     getTasks: function() {
       return $http
-        .get('http://localhost:8000/tasks')
+        .get(storageConfig.TASKS_URL)
         .then(function(response){
           return service.tasks = response.data || [];
         });
@@ -51,7 +53,7 @@ function ServerStorageStrategy($http, Task) {
     createTask: function(title) {
       var task = new Task(title);
       return $http
-        .post('http://localhost:8000/tasks', task)
+        .post(storageConfig.TASKS_URL, task)
         .then(function(response){
           service.tasks.push(response.data);
           return response.data;
@@ -66,7 +68,7 @@ function ServerStorageStrategy($http, Task) {
     deleteTask: function(task) {
       service.tasks.splice(service.tasks.indexOf(task), 1);
       return $http
-        .delete('http://localhost:8000' + task.links.self)
+        .delete(storageConfig.BASE_URL + task.links.self)
         .then(function(){
           return task;
         });
@@ -79,7 +81,7 @@ function ServerStorageStrategy($http, Task) {
      */
     updateTask: function(task) {
       return $http
-        .put('http://localhost:8000' + task.links.self, task)
+        .put(storageConfig.BASE_URL + task.links.self, task)
         .then(function(){
           return task;
         });

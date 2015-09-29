@@ -1,7 +1,6 @@
 'use strict';
 
 describe('LocalStorageStrategy', function(){
-
   var LocalStorageStrategy = require('app/core/task/local-storage-strategy'),
       Task = require('app/core/task/task');
 
@@ -10,7 +9,7 @@ describe('LocalStorageStrategy', function(){
 
   beforeEach(function(){
     angular.mock.module('angular-storage', function($provide){
-      $provide.constant('localStorageKey', storageKey);
+      $provide.constant('storageConfig', {LOCAL_STORAGE_KEY: storageKey});
       $provide.value('Task', Task);
       $provide.factory('storage', LocalStorageStrategy);
     });

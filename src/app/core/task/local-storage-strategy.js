@@ -6,7 +6,7 @@ module.exports = LocalStorageStrategy;
 LocalStorageStrategy.$inject = [
   '$q',
   '$localStorage',
-  'localStorageKey',
+  'storageConfig',
   'Task'
 ];
 
@@ -16,7 +16,7 @@ LocalStorageStrategy.$inject = [
  *
  * @param $q
  * @param $localStorage
- * @param {string} localStorageKey
+ * @param storageConfig
  * @param Task
  *
  * @returns {{
@@ -27,7 +27,9 @@ LocalStorageStrategy.$inject = [
  *   updateTask: Function
  * }}
  */
-function LocalStorageStrategy($q, $localStorage, localStorageKey, Task) {
+function LocalStorageStrategy($q, $localStorage, storageConfig, Task) {
+  var key = storageConfig.LOCAL_STORAGE_KEY;
+
   var service = {
 
     /**
@@ -40,7 +42,7 @@ function LocalStorageStrategy($q, $localStorage, localStorageKey, Task) {
      * @returns {Array}
      */
     getTasks: function() {
-      service.tasks = $localStorage.getObject(localStorageKey) || [];
+      service.tasks = $localStorage.getObject(key) || [];
       return $q.resolve(service.tasks);
     },
 
@@ -81,7 +83,7 @@ function LocalStorageStrategy($q, $localStorage, localStorageKey, Task) {
 
 
   function save() {
-    $localStorage.putObject(localStorageKey, service.tasks);
+    $localStorage.putObject(key, service.tasks);
   }
 
 

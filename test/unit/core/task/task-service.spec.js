@@ -2,14 +2,18 @@
 
 describe('TaskService', function(){
   var TaskService = require('app/core/task/task-service');
+  var storageConfig = require('app/config/storage');
   var LocalStorageStrategy = {};
   var ServerStorageStrategy = {};
 
 
   describe('LocalStorageStrategy', function(){
     beforeEach(function(){
+      var config = angular.copy(storageConfig);
+      config.STORAGE_STRATEGY = 'LocalStorageStrategy';
+
       angular.mock.module(function($provide){
-        $provide.constant('storageStrategy', 'LocalStorageStrategy');
+        $provide.constant('storageConfig', config);
         $provide.value('LocalStorageStrategy', LocalStorageStrategy);
         $provide.value('ServerStorageStrategy', ServerStorageStrategy);
         $provide.factory('taskService', TaskService);
@@ -24,8 +28,11 @@ describe('TaskService', function(){
 
   describe('ServerStorageStrategy', function(){
     beforeEach(function(){
+      var config = angular.copy(storageConfig);
+      config.STORAGE_STRATEGY = 'ServerStorageStrategy';
+
       angular.mock.module(function($provide){
-        $provide.constant('storageStrategy', 'ServerStorageStrategy');
+        $provide.constant('storageConfig', config);
         $provide.value('LocalStorageStrategy', LocalStorageStrategy);
         $provide.value('ServerStorageStrategy', ServerStorageStrategy);
         $provide.factory('taskService', TaskService);
