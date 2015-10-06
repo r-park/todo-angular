@@ -27,7 +27,6 @@ ServerStorageStrategy.$inject = [
  */
 function ServerStorageStrategy($http, storageConfig, Task) {
   var service = {
-
     /**
      * @type Array
      */
@@ -48,7 +47,7 @@ function ServerStorageStrategy($http, storageConfig, Task) {
     /**
      * @param {string} title
      * @async
-     * @returns {Task}
+     * @returns {ITask}
      */
     createTask: function(title) {
       var task = new Task(title);
@@ -61,9 +60,9 @@ function ServerStorageStrategy($http, storageConfig, Task) {
     },
 
     /**
-     * @param {Task} task
+     * @param {ITask} task
      * @async
-     * @returns {Task}
+     * @returns {ITask}
      */
     deleteTask: function(task) {
       service.tasks.splice(service.tasks.indexOf(task), 1);
@@ -75,9 +74,9 @@ function ServerStorageStrategy($http, storageConfig, Task) {
     },
 
     /**
-     * @param {Task} task
+     * @param {ITask} task
      * @async
-     * @returns {Task}
+     * @returns {ITask}
      */
     updateTask: function(task) {
       return $http
@@ -86,7 +85,6 @@ function ServerStorageStrategy($http, storageConfig, Task) {
           return task;
         });
     }
-
   };
 
 

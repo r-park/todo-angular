@@ -8,6 +8,11 @@ TaskListController.$inject = [
 ];
 
 
+/**
+ * @name TaskListController
+ * @constructor
+ * @param {TaskService} taskService
+ */
 function TaskListController(taskService) {
   var vm = this;
 

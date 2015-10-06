@@ -9,6 +9,12 @@ TaskFormController.$inject = [
 ];
 
 
+/**
+ * @name TaskFormController
+ * @constructor
+ * @param $scope
+ * @param {TaskService} taskService
+ */
 function TaskFormController($scope, taskService) {
   var vm = this;
 

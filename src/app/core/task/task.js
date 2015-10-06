@@ -1,11 +1,19 @@
 'use strict';
 
 
+/**
+ * @typedef {Object} ITask
+ * @property {boolean} completed
+ * @property {number}  createdAt
+ * @property {string}  title
+ */
+
+
 module.exports = Task;
 
 /**
- * @constructor
  * @name Task
+ * @constructor
  * @param {string} [title]
  */
 function Task(title) {

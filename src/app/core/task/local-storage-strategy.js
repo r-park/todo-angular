@@ -30,8 +30,8 @@ LocalStorageStrategy.$inject = [
 function LocalStorageStrategy($q, $localStorage, storageConfig, Task) {
   var key = storageConfig.LOCAL_STORAGE_KEY;
 
-  var service = {
 
+  var service = {
     /**
      * @type Array
      */
@@ -61,7 +61,7 @@ function LocalStorageStrategy($q, $localStorage, storageConfig, Task) {
     /**
      * @param {Task} task
      * @async
-     * @returns {Task}
+     * @returns {ITask}
      */
     deleteTask: function(task) {
       service.tasks.splice(service.tasks.indexOf(task), 1);
@@ -70,15 +70,14 @@ function LocalStorageStrategy($q, $localStorage, storageConfig, Task) {
     },
 
     /**
-     * @param {Task} task
+     * @param {ITask} task
      * @async
-     * @returns {Task}
+     * @returns {ITask}
      */
     updateTask: function(task) {
       save();
       return $q.resolve(task);
     }
-
   };
 
 

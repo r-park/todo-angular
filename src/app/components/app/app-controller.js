@@ -8,6 +8,11 @@ AppController.$inject = [
 ];
 
 
+/**
+ * @name AppController
+ * @constructor
+ * @param {StateService} stateService
+ */
 function AppController(stateService) {
   this.state = stateService;
 }

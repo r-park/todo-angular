@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/r-park/todo-angular.svg?branch=master)](https://travis-ci.org/r-park/todo-angular)
-[![Coverage Status](https://coveralls.io/repos/r-park/todo-angular/badge.svg?branch=master)](https://coveralls.io/r/r-park/todo-angular?branch=master)
+[![Travis branch](https://img.shields.io/travis/r-park/todo-angular/master.svg?style=flat-square)](https://travis-ci.org/r-park/todo-angular)
+[![Coveralls branch](https://img.shields.io/coveralls/r-park/todo-angular/master.svg?style=flat-square)](https://coveralls.io/github/r-park/todo-angular?branch=master)
 
 # Todo app with Angular 1.5
 - Angular 1.5
@@ -7,8 +7,25 @@
 - Browserify
 - SASS
 
+Try the demo at <a href="http://r-park.github.io/todo-angular" target="_blank">r-park.github.io/todo-angular</a>
+
 ## Installing dependencies
-The gulp tasks for this project require gulp v4-alpha ([docs](https://github.com/gulpjs/gulp/tree/4.0/docs)). If you already have gulp v3.x installed globally, it must be removed to make way for v4.
+```bash
+npm install
+```
+
+#### Gulp v4
+The gulp tasks for this project require gulp v4-alpha ([docs](https://github.com/gulpjs/gulp/tree/4.0/docs)). If you don't wish to install it at this time, you must run the gulp tasks using the locally installed gulp. For example, with gulp v4 installed:
+```bash
+gulp dev
+```
+Without gulp v4:
+```bash
+./node_modules/.bin/gulp dev
+```
+
+#### Installing Gulp v4 (optional)
+If you already have gulp v3.x installed globally, it must be removed to make way for v4.
 ```bash
 npm uninstall -g gulp
 ```
@@ -16,46 +33,31 @@ Next, install the gulp v4 `gulp-cli` globally.
 ```bash
 npm install -g gulpjs/gulp-cli#4.0
 ```
-Finally, run the following command from the project's root directory to install the dependencies defined in package.json.
-```bash
-npm install
-```
 
 ## Running the app
-The following command will build the project, start the server, and open the app in Google Chrome.
 ```bash
 gulp
 ```
-To use a different browser, edit the `browser` field in [gulpfile.js](https://github.com/r-park/todo-angular/blob/master/gulpfile.js).
-```bash
-browserSync: {
-  browser: ['google chrome']
-  ...
-}
-```
-The default storage strategy uses the browser's `localStorage` api. A server storage strategy is also available, powered by `express`. Note that you will need to provide your own `mongodb` instance. To switch to the server storage strategy, edit the [storage config setting](https://github.com/r-park/todo-angular/blob/master/src/app/config/storage.js).
-```bash
-// LocalStorageStrategy | ServerStorageStrategy
-exports.STORAGE_STRATEGY = 'ServerStorageStrategy';
-```
+Running `gulp` will:
+- Build the project
+- Start the server at <a href="http://localhost:7000" target="_blank">localhost:7000</a>
 
 ## Developing
 ```bash
 gulp dev
 ```
-The command above will:
-- build the project
-- start the server
-- open the app in Google Chrome
-- watch for changes to the source files
-- live-reload the browser after source file changes have been processed
+Running `gulp dev` will:
+- Build the project
+- Start the server at <a href="http://localhost:7000" target="_blank">localhost:7000</a>
+- Open the app in Google Chrome
+- Watch for changes to the source files and process changes
+- Live-reload the browser
 
 ## Testing
-To run the test suite:
 ```bash
 gulp test
 ```
-The following task will run the test suite, watch for changes to the source files, and re-run the tests when sources are modified:
+The following command will run the test suite, watch for changes to the source files, and re-run the tests when sources are modified:
 ```bash
 gulp test.watch
 ```

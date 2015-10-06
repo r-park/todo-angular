@@ -12,9 +12,11 @@ StateService.$inject = [
 
 /**
  * @name StateService
+ *
  * @param $state
  * @param $stateParams
  * @param Task
+ *
  * @returns {{
  *   params: Object,
  *   isActiveTasks: Function,
@@ -27,7 +29,6 @@ StateService.$inject = [
  */
 function StateService($state, $stateParams, Task) {
   return {
-
     /**
      * @type {Object}
      */
@@ -56,7 +57,7 @@ function StateService($state, $stateParams, Task) {
 
     /**
      * @async
-     * @returns {promise}
+     * @returns $state.current
      */
     toActiveTasks: function() {
       return $state.go('app.tasks', {filter: Task.STATUS_ACTIVE});
@@ -64,7 +65,7 @@ function StateService($state, $stateParams, Task) {
 
     /**
      * @async
-     * @returns {promise}
+     * @returns $state.current
      */
     toCompletedTasks: function() {
       return $state.go('app.tasks', {filter: Task.STATUS_COMPLETED});
@@ -72,11 +73,10 @@ function StateService($state, $stateParams, Task) {
 
     /**
      * @async
-     * @returns {promise}
+     * @returns $state.current
      */
     toTasks: function() {
       return $state.go('app.tasks');
     }
-
   };
 }
