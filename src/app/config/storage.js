@@ -1,4 +1,4 @@
-exports.LOCAL_STORAGE_KEY = 'TODO_APP';
+exports.LOCAL_STORAGE_KEY = 'TODO-APP';
 
 // LocalStorageStrategy | ServerStorageStrategy
 exports.STORAGE_STRATEGY = 'LocalStorageStrategy';
