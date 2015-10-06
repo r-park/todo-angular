@@ -1,7 +1,7 @@
 'use strict';
 
-describe('Router', function(){
-  var routerConfig = require('app/router'),
+describe('Router config', function(){
+  var routerConfig = require('app/config/router'),
       Task = require('app/core/task/task');
 
 
@@ -52,6 +52,14 @@ describe('Router', function(){
         $state.go('app.tasks', {filter: Task.STATUS_COMPLETED});
         $rootScope.$digest();
         expect($stateParams.filter).toBe('completed');
+      }));
+    });
+
+    describe('with invalid `filter` param', function(){
+      it('should transition to default `tasks` state', inject(function($rootScope, $state){
+        $state.go('app.tasks', {filter: 'foo'});
+        $rootScope.$digest();
+        expect($state.current.name).toBe('app.tasks');
       }));
     });
   });

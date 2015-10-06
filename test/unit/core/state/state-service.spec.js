@@ -1,7 +1,7 @@
 'use strict';
 
 describe('StateService', function(){
-  var routerConfig = require('app/router'),
+  var routerConfig = require('app/config/router'),
       StateService = require('app/core/state/state-service'),
       Task = require('app/core/task/task');
 

@@ -1,7 +1,15 @@
 'use strict';
 
 
-module.exports = ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+module.exports = router;
+
+router.$inject = [
+  '$stateProvider',
+  '$urlRouterProvider'
+];
+
+
+function router($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state({
       abstract: true,
@@ -36,4 +44,4 @@ module.exports = ['$stateProvider', '$urlRouterProvider', function($stateProvide
 
 
   $urlRouterProvider.otherwise('/tasks');
-}];
+}

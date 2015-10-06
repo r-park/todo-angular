@@ -100,8 +100,6 @@ describe('ServerStorageStrategy', function(){
 
 
   describe('Updating a task', function(){
-    xit('should update task in `tasks` array', function(){});
-
     it('should PUT task to server', function(){
       var task = new Task('test');
       task.links = {self: '/tasks/123'};

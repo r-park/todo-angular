@@ -21,7 +21,7 @@ var app = angular
     State (ui-router)
   -----------------------------------*/
   .factory('StateService', require('./core/state/state-service'))
-  .config(require('./router'))
+  .config(require('./config/router'))
 
 
   /*===================================
