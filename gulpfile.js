@@ -3,6 +3,7 @@ var assign        = require('object-assign'),
     browserify    = require('browserify'),
     browserSync   = require('browser-sync'),
     buffer        = require('vinyl-buffer'),
+    connect       = require('gulp-connect'),
     coveralls     = require('gulp-coveralls'),
     del           = require('del'),
     eslint        = require('gulp-eslint'),
@@ -77,8 +78,9 @@ var config = {
     notify: false,
     port: 7000,
     reloadDelay: 200,
-    server: {baseDir: '.'},
-    startPath: paths.target
+    server: {
+      baseDir: paths.target
+    }
   },
 
   copy: {
@@ -208,26 +210,6 @@ gulp.task('js.watch', function(){
 });
 
 
-gulp.task('karma', function(done){
-  var conf = assign({}, config.karma, {singleRun: true});
-  var server = new KarmaServer(conf, function(error){
-    if (error) process.exit(error);
-    else done();
-  });
-  server.start();
-});
-
-
-gulp.task('karma.watch', function(done){
-  var server = new KarmaServer(config.karma, function(error){
-    if (error) process.exit(error);
-    else done();
-  });
-
-  server.start();
-});
-
-
 gulp.task('lint', function(){
   return gulp
     .src(config.eslint.src)
@@ -249,15 +231,25 @@ gulp.task('sass', function(){
 
 
 gulp.task('server', function(done){
-  browserSync
-    .create()
-    .init(config.browserSync, done);
+  connect.server({
+    port: 7000,
+    livereload: false,
+    root: paths.target
+  });
+  done();
 });
 
 
 gulp.task('server.api', function(done){
   todoServer.start();
   done();
+});
+
+
+gulp.task('server.sync', function(done){
+  browserSync
+    .create()
+    .init(config.browserSync, done);
 });
 
 
@@ -270,12 +262,9 @@ gulp.task('templates', function(){
 });
 
 
-gulp.task('test', gulp.series('lint', 'karma'));
-
-
-gulp.task('test.watch', gulp.series('lint', 'karma.watch'));
-
-
+/*===========================
+  BUILD
+---------------------------*/
 gulp.task('build', gulp.series(
   'clean.target',
   'copy.assets',
@@ -286,10 +275,14 @@ gulp.task('build', gulp.series(
 ));
 
 
-gulp.task('default', gulp.series('test', 'build', 'js', 'server'));
+gulp.task('build.dev', gulp.series('build', 'js.watch'));
+gulp.task('build.dist', gulp.series('build', 'js'));
 
 
-gulp.task('dev', gulp.series('build', 'js.watch', 'server', function watch(){
+/*===========================
+  DEVELOP
+---------------------------*/
+gulp.task('dev', gulp.series('build.dev', 'server.sync', function watch(){
   gulp.watch(paths.src.assets, gulp.task('copy.assets'));
   gulp.watch(paths.src.html, gulp.task('copy.html'));
   gulp.watch(paths.src.sass, gulp.task('sass'));
@@ -297,4 +290,42 @@ gulp.task('dev', gulp.series('build', 'js.watch', 'server', function watch(){
 }));
 
 
-gulp.task('dist', gulp.series('test', 'build', 'js', 'headers'));
+/*===========================
+  TEST
+---------------------------*/
+gulp.task('karma', function(done){
+  var conf = assign({}, config.karma, {singleRun: true});
+  var server = new KarmaServer(conf, function(error){
+    if (error) process.exit(error);
+    else done();
+  });
+  server.start();
+});
+
+
+gulp.task('karma.watch', function(done){
+  var server = new KarmaServer(config.karma, function(error){
+    if (error) process.exit(error);
+    else done();
+  });
+
+  server.start();
+});
+
+
+gulp.task('test', gulp.series('lint', 'karma'));
+
+
+gulp.task('test.watch', gulp.series('lint', 'karma.watch'));
+
+
+/*===========================
+  RELEASE
+---------------------------*/
+gulp.task('dist', gulp.series('test', 'build.dist', 'headers'));
+
+
+/*===========================
+  RUN
+---------------------------*/
+gulp.task('default', gulp.series('build.dist', 'server'));
