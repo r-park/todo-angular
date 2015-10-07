@@ -3,7 +3,6 @@ var assign        = require('object-assign'),
     browserify    = require('browserify'),
     browserSync   = require('browser-sync'),
     buffer        = require('vinyl-buffer'),
-    connect       = require('gulp-connect'),
     coveralls     = require('gulp-coveralls'),
     del           = require('del'),
     eslint        = require('gulp-eslint'),
@@ -76,6 +75,7 @@ var config = {
     browser: ['google chrome'],
     files: [paths.target + '/**/*'],
     notify: false,
+    open: false,
     port: 7000,
     reloadDelay: 200,
     server: {
@@ -231,25 +231,15 @@ gulp.task('sass', function(){
 
 
 gulp.task('server', function(done){
-  connect.server({
-    port: 7000,
-    livereload: false,
-    root: paths.target
-  });
-  done();
+  browserSync
+    .create()
+    .init(config.browserSync, done);
 });
 
 
 gulp.task('server.api', function(done){
   todoServer.start();
   done();
-});
-
-
-gulp.task('server.sync', function(done){
-  browserSync
-    .create()
-    .init(config.browserSync, done);
 });
 
 
@@ -282,7 +272,7 @@ gulp.task('build.dist', gulp.series('build', 'js'));
 /*===========================
   DEVELOP
 ---------------------------*/
-gulp.task('dev', gulp.series('build.dev', 'server.sync', function watch(){
+gulp.task('dev', gulp.series('build.dev', 'server', function watch(){
   gulp.watch(paths.src.assets, gulp.task('copy.assets'));
   gulp.watch(paths.src.html, gulp.task('copy.html'));
   gulp.watch(paths.src.sass, gulp.task('sass'));
