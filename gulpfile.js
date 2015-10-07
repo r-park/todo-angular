@@ -22,12 +22,6 @@ var assign        = require('object-assign'),
 
 
 /*=========================================================
-  ENV
----------------------------------------------------------*/
-var DIST = gutil.env._[0] === 'dist';
-
-
-/*=========================================================
   PATHS
 ---------------------------------------------------------*/
 var paths = {
@@ -63,7 +57,7 @@ var config = {
   browserify: {
     options: {
       cache: {},
-      debug: !DIST,
+      debug: true,
       entries: './src/app/main.js',
       noparse: [],
       packageCache: {}
@@ -117,7 +111,7 @@ var config = {
 
   sass: {
     errLogToConsole: true,
-    outputStyle: DIST ? 'compressed' : 'nested',
+    outputStyle: 'nested',
     precision: 10,
     sourceComments: false
   },
@@ -180,6 +174,7 @@ gulp.task('headers', function(){
 
 
 gulp.task('js', function(){
+  config.browserify.options.debug = false;
   var bundler = browserify(config.browserify.options);
   bundler.on('log', gutil.log);
   return bundler
