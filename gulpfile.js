@@ -1,5 +1,4 @@
-var assign        = require('object-assign'),
-    autoprefixer  = require('autoprefixer'),
+var autoprefixer  = require('autoprefixer'),
     browserify    = require('browserify'),
     browserSync   = require('browser-sync'),
     buffer        = require('vinyl-buffer'),
@@ -9,7 +8,7 @@ var assign        = require('object-assign'),
     gulp          = require('gulp'),
     gutil         = require('gulp-util'),
     header        = require('gulp-header'),
-    KarmaServer   = require('karma').Server,
+    karma         = require('karma'),
     minifyHtml    = require('gulp-minify-html'),
     postcss       = require('gulp-postcss'),
     sass          = require('gulp-sass'),
@@ -66,7 +65,6 @@ var config = {
   },
 
   browserSync: {
-    browser: ['google chrome'],
     files: [paths.target + '/**/*'],
     notify: false,
     open: false,
@@ -278,30 +276,24 @@ gulp.task('dev', gulp.series('build.dev', 'server', function watch(){
 /*===========================
   TEST
 ---------------------------*/
-gulp.task('karma', function(done){
-  var conf = assign({}, config.karma, {singleRun: true});
-  var server = new KarmaServer(conf, function(error){
+function karmaServer(options, done) {
+  var server = new karma.Server(options, function(error){
     if (error) process.exit(error);
-    else done();
+    done();
   });
   server.start();
-});
+}
 
 
-gulp.task('karma.watch', function(done){
-  var server = new KarmaServer(config.karma, function(error){
-    if (error) process.exit(error);
-    else done();
-  });
-
-  server.start();
-});
+gulp.task('test', gulp.series('lint', function karma(done){
+  config.karma.singleRun = true;
+  karmaServer(config.karma, done);
+}));
 
 
-gulp.task('test', gulp.series('lint', 'karma'));
-
-
-gulp.task('test.watch', gulp.series('lint', 'karma.watch'));
+gulp.task('test.watch', gulp.series('lint', function karmaWatch(done){
+  karmaServer(config.karma, done);
+}));
 
 
 /*===========================
