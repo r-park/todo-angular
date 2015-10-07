@@ -1,7 +1,7 @@
 'use strict';
 
 describe('focus directive', function(){
-  var focusDirective = require('app/directives/focus-directive');
+  var focusDirective = require('./focus-directive');
 
   var element,
       scope,

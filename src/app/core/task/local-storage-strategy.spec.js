@@ -1,8 +1,8 @@
 'use strict';
 
 describe('LocalStorageStrategy', function(){
-  var LocalStorageStrategy = require('app/core/task/local-storage-strategy'),
-      Task = require('app/core/task/task');
+  var Task = require('app/core/task/task');
+  var LocalStorageStrategy = require('./local-storage-strategy');
 
   var storageKey = 'test';
 

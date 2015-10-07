@@ -1,7 +1,7 @@
 'use strict';
 
 describe('AppController', function(){
-  var AppController = require('app/components/app/app-controller');
+  var AppController = require('./app-controller');
 
   var controller,
       stateService;

@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Task', function(){
-  var Task = require('app/core/task/task');
+  var Task = require('./task');
 
 
   beforeEach(function(){

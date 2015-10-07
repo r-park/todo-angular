@@ -1,7 +1,7 @@
 'use strict';
 
 describe('taskStatus filter', function(){
-  var taskStatusFilter = require('app/components/tasks/task-item/task-status-filter');
+  var taskStatusFilter = require('./task-status-filter');
 
 
   beforeEach(function(){

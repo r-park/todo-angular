@@ -1,9 +1,9 @@
 'use strict';
 
 describe('ServerStorageStrategy', function(){
-  var ServerStorageStrategy = require('app/core/task/server-storage-strategy'),
-      Task = require('app/core/task/task'),
-      storageConfig = require('app/config/storage');
+  var storageConfig = require('app/config/storage');
+  var ServerStorageStrategy = require('./server-storage-strategy');
+  var Task = require('./task');
 
   var httpBackend, storage;
 

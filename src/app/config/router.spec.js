@@ -1,8 +1,8 @@
 'use strict';
 
 describe('Router config', function(){
-  var routerConfig = require('app/config/router'),
-      Task = require('app/core/task/task');
+  var Task = require('app/core/task/task');
+  var routerConfig = require('./router');
 
 
   beforeEach(function(){

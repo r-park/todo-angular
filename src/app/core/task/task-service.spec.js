@@ -1,8 +1,8 @@
 'use strict';
 
 describe('TaskService', function(){
-  var TaskService = require('app/core/task/task-service');
   var storageConfig = require('app/config/storage');
+  var TaskService = require('./task-service');
   var LocalStorageStrategy = {};
   var ServerStorageStrategy = {};
 

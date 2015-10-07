@@ -39,9 +39,7 @@ var paths = {
     tpl: 'src/app/components/**/*.html'
   },
 
-  target: 'target',
-
-  test: 'test/unit/**/*.js'
+  target: 'target'
 };
 
 
@@ -86,7 +84,7 @@ var config = {
   },
 
   eslint: {
-    src: [paths.src.js, paths.test]
+    src: paths.src.js
   },
 
   header: {

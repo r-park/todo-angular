@@ -16,8 +16,7 @@ module.exports = function(config) {
       'node_modules/angular-ui-router/release/angular-ui-router.js',
       'node_modules/sinon/pkg/sinon.js',
       'src/app/**/*.js',
-      'src/app/**/*.html',
-      'test/unit/**'
+      'src/app/**/*.html'
     ],
 
     exclude: [
@@ -26,7 +25,6 @@ module.exports = function(config) {
 
     preprocessors: {
       'src/app/**/*.js': ['commonjs'],
-      'test/unit/**/*.js': ['commonjs'],
       'src/app/**/*.html': ['ng-html2js']
     },
 

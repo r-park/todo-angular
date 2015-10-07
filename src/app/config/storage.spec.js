@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Storage config', function() {
-  var storageConfig = require('app/config/storage');
+  var storageConfig = require('./storage');
 
   it('should define a key for localStorage', function(){
     expect(storageConfig.LOCAL_STORAGE_KEY).toBe('TODO-APP');

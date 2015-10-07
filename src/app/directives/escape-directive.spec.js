@@ -1,7 +1,7 @@
 'use strict';
 
 describe('escape directive', function(){
-  var escapeDirective = require('app/directives/escape-directive');
+  var escapeDirective = require('./escape-directive');
 
   var element,
       scope;
