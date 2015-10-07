@@ -1,4 +1,4 @@
-/* todo-angular v0.1.0 - 2015-10-06T07:41:34.390Z - https://github.com/r-park/todo-angular */
+/* todo-angular v0.1.1 - 2015-10-07T23:20:42.842Z - https://github.com/r-park/todo-angular */
 angular.module("templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("app/app.html","<header class=\"header\"><div class=\"g-row\"><div class=\"g-col\"><h1 class=\"header__title\">Todo Angular</h1><a class=\"header__link\" href=\"https://github.com/r-park/todo-angular\"></a></div></div></header><main class=\"main\" ui-view=\"main\"></main>");
 $templateCache.put("tasks/tasks.html","<div class=\"g-row\"><div class=\"g-col\" ui-view=\"form\"></div><div class=\"g-col\" ui-view=\"list\"></div></div>");
 $templateCache.put("tasks/task-form/task-form.html","<form class=\"task-form\" name=\"newTaskForm\" ng-submit=\"taskForm.submit()\" novalidate><input autocomplete=\"off\" autofocus class=\"task-form__input\" escape=\"taskForm.cancel()\" name=\"taskTitle\" ng-model=\"taskForm.title\" placeholder=\"What needs to be done?\" required type=\"text\"></form>");
