@@ -1,20 +1,16 @@
 root: true
 
-
 extends: eslint:recommended
-
 
 env:
   browser: true
   jasmine: true
   node: true
 
-
 globals:
   angular: true
   inject: true
   sinon: true
-
 
 rules:
   camelcase: 2

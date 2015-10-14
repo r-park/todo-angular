@@ -51,13 +51,13 @@ module.exports = function(config) {
     singleRun: false,
 
     customLaunchers: {
-      CHROME_TRAVIS: {
+      TRAVIS_CHROME: {
         base: 'Chrome',
         flags: ['--no-sandbox']
       }
     },
 
-    browsers: process.env.TRAVIS ? ['CHROME_TRAVIS'] : ['Chrome']
+    browsers: process.env.TRAVIS ? ['TRAVIS_CHROME'] : ['Chrome']
 
   };
 

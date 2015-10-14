@@ -221,14 +221,14 @@ gulp.task('sass', function(){
 });
 
 
-gulp.task('server', function(done){
+gulp.task('serve', function(done){
   browserSync
     .create()
     .init(config.browserSync, done);
 });
 
 
-gulp.task('server.api', function(done){
+gulp.task('serve.api', function(done){
   todoServer.start();
   done();
 });
@@ -263,7 +263,7 @@ gulp.task('build.dist', gulp.series('build', 'js'));
 /*===========================
   DEVELOP
 ---------------------------*/
-gulp.task('dev', gulp.series('build.dev', 'server', function watch(){
+gulp.task('default', gulp.series('build.dev', 'serve', function watch(){
   gulp.watch(paths.src.assets, gulp.task('copy.assets'));
   gulp.watch(paths.src.html, gulp.task('copy.html'));
   gulp.watch(paths.src.sass, gulp.task('sass'));
@@ -303,4 +303,4 @@ gulp.task('dist', gulp.series('test', 'build.dist', 'headers'));
 /*===========================
   RUN
 ---------------------------*/
-gulp.task('default', gulp.series('build.dist', 'server'));
+gulp.task('run', gulp.series('build.dist', 'serve'));
