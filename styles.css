@@ -1,3 +1,4 @@
+/* todo-angular v0.1.2 - 2015-10-14T23:24:20.228Z - https://github.com/r-park/todo-angular */
 @charset "UTF-8";
 *,
 *:before,
@@ -240,6 +241,9 @@ table {
   color: #fff;
   font-size: 1.125rem;
   font-weight: 300; }
+  @media screen and (min-width: 33.75em) {
+    .task-item {
+      font-size: 1.5rem; } }
 
 .task-item--editing {
   border-bottom: 1px dotted #ccc; }
@@ -328,9 +332,6 @@ table {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; }
-  @media screen and (min-width: 33.75em) {
-    .task-item__title {
-      font-size: 1.5rem; } }
   .task-item__title:after {
     position: absolute;
     left: 0;
