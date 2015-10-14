@@ -30,11 +30,8 @@ function TaskFormController($scope, taskService) {
 
   vm.submit = function() {
     if ($scope.newTaskForm.$valid) {
-      taskService
-        .createTask(vm.title)
-        .then(function(){
-          setTitle();
-        });
+      taskService.createTask(vm.title);
     }
+    setTitle();
   };
 }
