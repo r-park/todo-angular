@@ -19,6 +19,7 @@ function TaskItemController($scope, taskService) {
   var vm = this;
 
   vm.editing = false;
+
   vm.statusUpdated = false;
 
   vm.cancelEdit = function() {
@@ -36,7 +37,7 @@ function TaskItemController($scope, taskService) {
 
   vm.save = function() {
     if (vm.editing) {
-      if ($scope.task.title !== vm.title) {
+      if ($scope.titleForm.$valid && $scope.task.title !== vm.title) {
         $scope.task.title = vm.title;
         taskService.updateTask($scope.task);
       }

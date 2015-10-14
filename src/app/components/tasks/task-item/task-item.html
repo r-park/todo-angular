@@ -26,12 +26,14 @@
       {{ task.title }}
     </div>
 
-    <form ng-show="taskItem.editing" ng-submit="taskItem.save()" novalidate>
+    <form name="titleForm" ng-show="taskItem.editing" ng-submit="taskItem.save()" novalidate>
       <input
         autocomplete="off"
         class="task-item__input"
         escape="taskItem.cancelEdit()"
         focus="taskItem.editing"
+        maxlength="64"
+        name="title"
         ng-blur="taskItem.save()"
         ng-model="taskItem.title"
         required

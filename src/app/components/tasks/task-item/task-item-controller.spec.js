@@ -1,7 +1,7 @@
 'use strict';
 
 describe('TaskItemController', function(){
-  var TaskItemController = require('./task-item-controller');
+  var TaskItemController = require('app/components/tasks/task-item/task-item-controller');
 
   var controller,
       scope,
@@ -12,6 +12,7 @@ describe('TaskItemController', function(){
     inject(function($controller, $q, $rootScope){
       scope = $rootScope.$new();
       scope.task = {completed: false, title: 'test'};
+      scope.titleForm = {$valid: true};
 
       taskService = {
         tasks: [],
@@ -98,23 +99,33 @@ describe('TaskItemController', function(){
   });
 
 
-  describe('Updating a task', function(){
-    it('should set `editing` to `false`', function(){
-      controller.editing = true;
-      controller.save();
-      scope.$digest();
-      expect(controller.editing).toBe(false);
-    });
+  describe('Updating task title', function(){
+    describe('when in edit mode', function() {
+      it('should save title if form is valid and title has changed', function(){
+        controller.editing = true;
+        controller.title = 'changed title';
+        controller.save();
+        scope.$digest();
+        expect(taskService.updateTask.callCount).toBe(1);
+      });
 
-    describe('when `editing` is `false`', function(){
-      it('should do nothing', function(){
+      it('should not save title if form is invalid and title has changed', function(){
+        controller.editing = true;
+        controller.title = 'changed title';
+        scope.titleForm.$valid = false;
         controller.save();
         scope.$digest();
         expect(taskService.updateTask.callCount).toBe(0);
       });
-    });
 
-    describe('when `editing` is `true` and title has changed', function(){
+      it('should not save title if form is valid and title has not changed', function(){
+        controller.editing = true;
+        controller.title = scope.task.title;
+        controller.save();
+        scope.$digest();
+        expect(taskService.updateTask.callCount).toBe(0);
+      });
+
       it('should delegate to TaskService#updateTask', function(){
         controller.editing = true;
         controller.title = 'foo';
@@ -130,12 +141,15 @@ describe('TaskItemController', function(){
         scope.$digest();
         expect(taskService.updateTask.calledWith(scope.task)).toBe(true);
       });
-    });
 
-    describe('when `editing` is `true` and title has not changed', function(){
-      it('should do nothing', function(){
+      it('should always set `editing` to `false` upon completion', function(){
         controller.editing = true;
-        controller.title = scope.task.title;
+        controller.save();
+        scope.$digest();
+        expect(controller.editing).toBe(false);
+      });
+
+      it('should do nothing when not in edit mode', function(){
         controller.save();
         scope.$digest();
         expect(taskService.updateTask.callCount).toBe(0);
@@ -144,7 +158,7 @@ describe('TaskItemController', function(){
   });
 
 
-  describe('Toggling task status', function(){
+  describe('Updating task status', function(){
     it('should delegate to TaskService#updateTask', function(){
       controller.toggleCompleted();
       expect(taskService.updateTask.callCount).toBe(1);
